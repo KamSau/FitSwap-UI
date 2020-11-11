@@ -1,0 +1,15 @@
+.button {
+  &__container {
+    &--base {
+      margin-top: 10%;
+      width: 100%;
+      margin-top: 2%;
+    }
+  }
+
+  &__content {
+    &--base {
+      width: 100%;
+    }
+  }
+}

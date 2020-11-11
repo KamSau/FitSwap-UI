@@ -1,0 +1,82 @@
+.button__container--base {
+  margin-top: 10%;
+  width: 100%;
+  margin-top: 2%; }
+
+.button__content--base {
+  width: 100%; }
+
+.input__container--base {
+  display: flex;
+  flex-direction: column; }
+
+.form__container--base {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  justify-content: center;
+  align-items: center; }
+
+.form__label--base {
+  font-size: 2rem; }
+
+.form__content--base {
+  flex-direction: column;
+  width: 80%; }
+
+.header__container--base {
+  width: 100%;
+  height: 10%;
+  background-color: #121212;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.header__logo--base {
+  height: 100%;
+  width: 10%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../FitSwap.PNG); }
+
+.header__login--base {
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-content: center;
+  align-self: center;
+  justify-content: center;
+  width: 20%; }
+
+.header__register--base {
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-content: center;
+  align-self: center;
+  justify-content: center;
+  width: 20%; }
+
+.login__container--base {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center; }
+
+* {
+  box-sizing: border-box; }
+
+#root,
+body,
+html {
+  width: 100%;
+  height: 100%; }
+
+.app__container--base {
+  width: 100%;
+  height: 100%; }
+
+.app__content--base {
+  padding-top: 5%; }

@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+import Login from "./pages/login/Login";
+import Header from "./components/header/Header";
 import axios from "axios";
-import logo from "./logo.svg";
 import "./App.css";
+import "./resources/css/main.css";
+import UserRegistry from "./pages/user-registry/UserRegistry";
+import Landing from "./pages/landing/Landing";
 
 function App() {
-  const [state, setState] = useState("");
-  useEffect(() => {
-    if (state === "") {
-      axios.get(`http://localhost:8080/api/v1/test`).then((res) => {
-        setState(res.data);
-      });
-    }
-  }, []);
+  const loggedUser = useContext({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {state === "" ? "Waiting for connection" : "Connection established!"}
-        </p>
-      </header>
-    </div>
+    <Router>
+      <div className="app__container--base">
+        <Header></Header>
+        <div className="app__content--base">
+          <Route exact path="/" component={Landing} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={UserRegistry} />
+        </div>
+      </div>
+    </Router>
   );
 }
 

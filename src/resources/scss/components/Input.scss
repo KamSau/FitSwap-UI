@@ -1,0 +1,12 @@
+.input {
+  &__container {
+    &--base {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__label {
+    &--base {
+    }
+  }
+}

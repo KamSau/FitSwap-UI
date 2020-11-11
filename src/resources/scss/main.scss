@@ -1,0 +1,29 @@
+@import "../scss/components/Button.scss";
+@import "../scss/components/Input.scss";
+@import "../scss/components/Form.scss";
+@import "../scss/components/Header.scss";
+@import "../scss/pages/Login.scss";
+* {
+  box-sizing: border-box;
+}
+
+#root,
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  &__container {
+    &--base {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__content {
+    &--base {
+      padding-top: 5%;
+    }
+  }
+}
