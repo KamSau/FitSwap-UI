@@ -7,6 +7,7 @@ import "./App.css";
 import "./resources/css/main.css";
 import UserRegistry from "./pages/user-registry/UserRegistry";
 import Landing from "./pages/landing/Landing";
+import UserProfile from "./pages/profile/UserProfile";
 
 function App() {
   const loggedUser = useContext({});
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={UserRegistry} />
+          <Route path="/profile/:username" component={UserProfile} />
         </div>
       </div>
     </Router>
