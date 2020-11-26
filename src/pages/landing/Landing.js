@@ -7,7 +7,7 @@ export default function Landing() {
   useEffect(() => {
     if (state !== "connected") {
       axios
-        .get(`https://fitswapbackend.herokuapp.com/api/v1/test`)
+        .get(`http://localhost:5000/api/v1/test`)
         .then((res) => {
           if (res.data === "connected") {
             setState(res.data);
