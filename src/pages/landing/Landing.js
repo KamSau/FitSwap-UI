@@ -6,11 +6,13 @@ export default function Landing() {
   const [state, setState] = useState("");
   useEffect(() => {
     if (state !== "connected") {
-      axios.get(`http://localhost:8090/api/v1/test`).then((res) => {
-        if (res.data === "connected") {
-          setState(res.data);
-        }
-      });
+      axios
+        .get(`http://localhost:5000/api/v1/test`)
+        .then((res) => {
+          if (res.data === "connected") {
+            setState(res.data);
+          }
+        });
     }
   }, []);
   return (
