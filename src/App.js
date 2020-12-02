@@ -6,6 +6,7 @@ import axios from "axios";
 import "./App.css";
 import "./resources/css/main.css";
 import UserRegistry from "./pages/user-registry/UserRegistry";
+import PostRegistry from "./pages/post-registry/PostRegistry";
 import Landing from "./pages/landing/Landing";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={UserRegistry} />
+          <Route path="/postRegister" component={PostRegistry} />
         </div>
       </div>
     </Router>
