@@ -30,16 +30,31 @@ export default function UserRegistry({}) {
     let pidentification = identification;
 
     let user = {username: pusername, name: pname, last_name: plast_name, middle_name: pmiddle_name, email: pemail, cellphone: ptelephone, password: ppassword, identification: pidentification, description: ""}
+    
     console.log(user);
     let valid = false;
     if(password === passwordConf){
       valid = validate(user);
     if(valid){
-      Axios.post("http://localhost:5000/api/v1/user", user).then((res) => {
-      console.log(res.data)
-    });
+      let data = user
+      Axios({
+        method: 'POST',
+        url: "http://localhost:5000/api/v1/user",
+        data: data
+      }).then(
+        sendCreds()
+      )
     }
     }
+  }
+
+  let sendCreds = () =>{
+    let creds = {password: password, username: username}
+    Axios({
+      method: 'POST',
+      url: "http://localhost:5000/api/v1/credentials",
+      data: creds
+    })
   }
 
   let validate = (user) => {
@@ -158,7 +173,9 @@ export default function UserRegistry({}) {
           text="Log in"
           type="submit"
           modifier="base"
-          onSubmitF={() => {
+          onSubmitF={(e) => {
+            e.preventDefalt();
+            setSubmitted(true);
           }}
         />
       </Form>
