@@ -43,7 +43,7 @@ export default function UserProfile({}) {
 				  	</div>)
 				}
 				console.log(it);
-				setItems(it);
+				setItems(it.reverse());
 			}).catch((error) => {
 				console.log(error);
 				console.log("No existen posts");
