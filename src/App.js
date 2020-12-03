@@ -10,12 +10,14 @@ import PostRegistry from "./pages/post-registry/PostRegistry";
 import Landing from "./pages/landing/Landing";
 import UserProfile from "./pages/profile/UserProfile";
 import Post from "./pages/post/Post";
+import {CloudinaryContext} from 'cloudinary-react';
 
 function App() {
   const loggedUser = useContext({});
 
   return (
-    <Router>
+    <Router>]
+      <CloduinaryContext cloudName="esalomc">
       <div className="app__container--base">
         <Header></Header>
         <div className="app__content--base">
@@ -24,8 +26,10 @@ function App() {
           <Route path="/register" component={UserRegistry} />
           <Route path="/post/:username/:post" component={Post} />
           <Route path="/profile/:username" component={UserProfile} />
+          <Route path="/postRegistry" component={PostRegistry} />
         </div>
       </div>
+      </CloduinaryContext>
     </Router>
   );
 }
