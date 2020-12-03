@@ -12,6 +12,7 @@ import Landing from "./pages/landing/Landing";
 import UserProfile from "./pages/profile/UserProfile";
 import Post from "./pages/post/Post";
 import { SessionContext } from "./helpers/SessionContext";
+import Footer from "./components/footer/Footer";
 function App() {
   const [session, setSession] = useState("");
   const jwt = useMemo(() => ({ session, setSession }), [session, setSession]);
@@ -29,6 +30,7 @@ function App() {
               <Route path="/post/:username/:post" component={Post} />
               <Route path="/profile/:username" component={UserProfile} />
             </div>
+            {session !== "" ? <Footer></Footer> : <div />}
           </div>
         </CloudinaryContext>
       </SessionContext.Provider>

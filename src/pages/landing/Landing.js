@@ -14,8 +14,18 @@ export default function Landing() {
           setState(res.data);
         }
       });
+    } else {
+      if (session !== "") {
+        axios
+          .get(`http://localhost:5000/api/v1/session`, {
+            headers: { Authorization: "Bearer " + session },
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
     }
-  }, []);
+  }, [session]);
   return (
     <div className="App">
       <div className="App-header">
