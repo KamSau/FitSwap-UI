@@ -1,32 +1,78 @@
-import React, { useState } from "react";
+import React, {
+	useState
+} from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import {
+	Link,
+	useParams
+} from "react-router-dom";
 export default function UserProfile({}) {
 	const [perfil, setPerfil] = useState([]);
+	const [posts, setPosts] = useState([]);
 	const [asked, setAsked] = useState(0);
-	let { username } = useParams();
+	const [asked2, setAsked2] = useState(0);
+	const [items, setItems] = useState([]);
+	const it = [];
+
+	let {
+		username
+	} = useParams();
+
 	const fetchData = async () => {
-		if(asked) return;
-	const res = await axios.get("http://localhost:8090/api/v1/user/"+username).then((response) => {
-		console.log(response.data);
-		setAsked(1);
-		setPerfil(response.data);
-
-	}).catch((error) => {
-        console.log(error);
-		console.log("No existe");	
+		if (asked) return;
+		const res = await axios.get("http://localhost:5000/api/v1/user/" + username).then(async (response) => {
+			console.log(response.data);
+			setAsked(1);
+			setPerfil(response.data);
 
 
-    });
+			await axios.get("http://localhost:5000/api/v1/post/" + response.data.id).then((responseP) => {
+				console.log(responseP.data);
+				setAsked(1);
+				setPosts(responseP.data);
+
+				for (const [index, value] of responseP.data.entries()) {
+					it.push(				 
+					<div className="gallery-item" tabIndex={0} key={value.id}>	
+						<Link to={"/post/"+username+"/"+value.id}>	 
+							<img src={value.url} className="gallery-image" alt="" />
+							<div className="gallery-item-type">
+								<span className="visually-hidden">Gallery</span><i className="fas fa-clone" aria-hidden="true" />
+							</div>
+						</Link>
+				  	</div>)
+				}
+				console.log(it);
+				setItems(it.reverse());
+			}).catch((error) => {
+				console.log(error);
+				console.log("No existen posts");
+
+
+			});
+
+
+
+
+
+		}).catch((error) => {
+			console.log(error);
+			console.log("No existe");
+
+
+		});
 	}
 
 
-	
-	
+
+
 
 
 	const project = () => {
-		fetchData();
+		if(!asked2){
+			fetchData();
+			setAsked2(1);
+		}
 			if(perfil.username){
 				return (
 					<div className="perfilFont">
@@ -38,9 +84,12 @@ export default function UserProfile({}) {
 						  </div>
 						  <div className="profile-user-settings">
 							<h1 className="profile-user-name">{perfil.username}</h1>
+							{/*
 							<button className="btn profile-edit-btn">Edit Profile</button>
+							*/}
 							<button className="btn profile-settings-btn" aria-label="profile settings"><i className="fas fa-cog" aria-hidden="true" /></button>
 						  </div>
+						  {/*
 						  <div className="profile-stats">
 							<ul>
 							  <li><span className="profile-stat-count">0</span> posts</li>
@@ -48,8 +97,9 @@ export default function UserProfile({}) {
 							  <li><span className="profile-stat-count">0</span> following</li>
 							</ul>
 						  </div>
+						  */}
 						  <div className="profile-bio">
-				<p><span className="profile-real-name">{perfil.name} {perfil.middleName} {perfil.lastName}</span> {perfil.description}</p>
+							<p><span className="profile-real-name">{perfil.name} {perfil.middleName} {perfil.lastName}</span> {perfil.description}</p>
 						  </div>
 						</div>
 						{/* End of profile section */}
@@ -59,69 +109,7 @@ export default function UserProfile({}) {
 					<main>
 					  <div className="container">
 						<div className="gallery">
-						  <div className="gallery-item" tabIndex={0}>
-							<img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=500&h=500&fit=crop" className="gallery-image" alt="" />
-							<div className="gallery-item-type">
-							  <span className="visually-hidden">Gallery</span><i className="fas fa-clone" aria-hidden="true" />
-							</div>
-							<div className="gallery-item-info">
-							  <ul>
-								<li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><i className="fas fa-heart" aria-hidden="true" /> 52</li>
-								<li className="gallery-item-comments"><span className="visually-hidden">Comments:</span><i className="fas fa-comment" aria-hidden="true" /> 4</li>
-							  </ul>
-							</div>
-						  </div>
-						  <div className="gallery-item" tabIndex={0}>
-							<img src="https://images.unsplash.com/photo-1515814472071-4d632dbc5d4a?w=500&h=500&fit=crop" className="gallery-image" alt="" />
-							<div className="gallery-item-info">
-							  <ul>
-								<li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><i className="fas fa-heart" aria-hidden="true" /> 66</li>
-								<li className="gallery-item-comments"><span className="visually-hidden">Comments:</span><i className="fas fa-comment" aria-hidden="true" /> 2</li>
-							  </ul>
-							</div>
-						  </div>
-						  <div className="gallery-item" tabIndex={0}>
-							<img src="https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=500&h=500&fit=crop" className="gallery-image" alt="" />
-							<div className="gallery-item-type">
-							  <span className="visually-hidden">Gallery</span><i className="fas fa-clone" aria-hidden="true" />
-							</div>
-							<div className="gallery-item-info">
-							  <ul>
-								<li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><i className="fas fa-heart" aria-hidden="true" /> 45</li>
-								<li className="gallery-item-comments"><span className="visually-hidden">Comments:</span><i className="fas fa-comment" aria-hidden="true" /> 0</li>
-							  </ul>
-							</div>
-						  </div>
-						  <div className="gallery-item" tabIndex={0}>
-							<img src="https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=500&h=500&fit=crop" className="gallery-image" alt="" />
-							<div className="gallery-item-info">
-							  <ul>
-								<li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><i className="fas fa-heart" aria-hidden="true" /> 34</li>
-								<li className="gallery-item-comments"><span className="visually-hidden">Comments:</span><i className="fas fa-comment" aria-hidden="true" /> 1</li>
-							  </ul>
-							</div>
-						  </div>
-						  <div className="gallery-item" tabIndex={0}>
-							<img src="https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop" className="gallery-image" alt="" />
-							<div className="gallery-item-info">
-							  <ul>
-								<li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><i className="fas fa-heart" aria-hidden="true" /> 41</li>
-								<li className="gallery-item-comments"><span className="visually-hidden">Comments:</span><i className="fas fa-comment" aria-hidden="true" /> 0</li>
-							  </ul>
-							</div>
-						  </div>
-						  <div className="gallery-item" tabIndex={0}>
-							<img src="https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop" className="gallery-image" alt="" />
-							<div className="gallery-item-type">
-							  <span className="visually-hidden">Video</span><i className="fas fa-video" aria-hidden="true" />
-							</div>
-							<div className="gallery-item-info">
-							  <ul>
-								<li className="gallery-item-likes"><span className="visually-hidden">Likes:</span><i className="fas fa-heart" aria-hidden="true" /> 30</li>
-								<li className="gallery-item-comments"><span className="visually-hidden">Comments:</span><i className="fas fa-comment" aria-hidden="true" /> 2</li>
-							  </ul>
-							</div>
-						  </div>
+						  {items}
 						</div>
 						{/* End of gallery */}
 						<div className="loader" />
