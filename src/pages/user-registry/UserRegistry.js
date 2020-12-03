@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import Form from "../../components/form/Form";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
@@ -6,17 +6,30 @@ import Axios from "axios";
 
 export default function UserRegistry({}) {
   let modifier = "base";
-
-  const [name,setName] = useState("");
-  const [lastName,setLastName] = useState("");
-  const [username,setUsername] = useState("");
-  const [middleName,setMiddleName] = useState("");
-  const [email,setEmail] = useState("");
-  const [identification,setIdentification] = useState("");
-  const [password,setPassword] = useState("");
-  const [passwordConf,setPasswordConf] = useState("");
-  const [cellphone,setCellphone] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [middleName, setMiddleName] = useState("");
+  const [email, setEmail] = useState("");
+  const [identification, setIdentification] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConf, setPasswordConf] = useState("");
+  const [cellphone, setCellphone] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    console.log("PRESSED", submitted);
+    if (submitted == 1) {
+      sendRegistry();
+      // if (valid) {
+      //   Axios.post(process.env.BACKEND + "/api/v1/post", post).then((res) => {
+      //     console.log(res.data);
+      //     setSubmitted(0);
+      //     //history.push("/profile/ksauma");
+      //   });
+      // }
+    }
+  }, [submitted]);
 
   let sendRegistry = () => {
     let pusername = username;
@@ -29,47 +42,59 @@ export default function UserRegistry({}) {
     let ppasswordConf = passwordConf;
     let pidentification = identification;
 
-    let user = {username: pusername, name: pname, last_name: plast_name, middle_name: pmiddle_name, email: pemail, cellphone: ptelephone, password: ppassword, identification: pidentification, description: ""}
-    
+    let user = {
+      username: pusername,
+      name: pname,
+      last_name: plast_name,
+      middle_name: pmiddle_name,
+      email: pemail,
+      cellphone: ptelephone,
+      password: ppassword,
+      identification: pidentification,
+      description: "",
+      img_url: "",
+    };
+
     console.log(user);
     let valid = false;
-    if(password === passwordConf){
+    if (password === passwordConf) {
       valid = validate(user);
-    if(valid){
-      let data = user
-      Axios({
-        method: 'POST',
-        url: "http://localhost:5000/api/v1/user",
-        data: data
-      }).then(
-        sendCreds()
-      )
+      if (valid) {
+        let data = user;
+        Axios.post("http://localhost:5000/api/v1/user", data).then(() => {
+          setSubmitted(0);
+        });
+      }
     }
-    }
-  }
-
-  let sendCreds = () =>{
-    let creds = {password: password, username: username}
-    Axios({
-      method: 'POST',
-      url: "http://localhost:5000/api/v1/credentials",
-      data: creds
-    })
-  }
+  };
 
   let validate = (user) => {
     let valid = false;
-      if(user.username === "" || user.password === "" || user.email === "" || user.name === "" || user.last_name === "" || user.cellphone === "" ){
-        valid = false;
-      }else{
-        valid = true;
-      }
-      return valid;
-  }
+    if (
+      user.username === "" ||
+      user.password === "" ||
+      user.email === "" ||
+      user.name === "" ||
+      user.last_name === "" ||
+      user.cellphone === ""
+    ) {
+      valid = false;
+    } else {
+      valid = true;
+    }
+    return valid;
+  };
 
   return (
     <div className={"login__container--" + modifier}>
-      <Form modifier="base" label="Create Account" onSubmitF={sendRegistry()}>
+      <Form
+        modifier="base"
+        label="Create Account"
+        onSubmitF={(e) => {
+          e.preventDefault();
+          setSubmitted(1);
+        }}
+      >
         <Input
           id="username"
           name="username"
@@ -174,7 +199,7 @@ export default function UserRegistry({}) {
           type="submit"
           modifier="base"
           onSubmitF={(e) => {
-            e.preventDefalt();
+            e.preventDefault();
             setSubmitted(true);
           }}
         />
