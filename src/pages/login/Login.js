@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Axios from "axios";
 import Form from "../../components/form/Form";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-export default function Login({}) {
+import { SessionContext } from "../../helpers/SessionContext";
+
+export default function Login({ history }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(0);
-
+  const { session, setSession } = useContext(SessionContext);
   useEffect(() => {
     console.log("PRESSED", submitted);
     if (submitted == 1) {
@@ -24,8 +26,9 @@ export default function Login({}) {
         Axios.post("http://localhost:5000/api/v1/credentials", creds).then(
           (res) => {
             console.log(res.data);
-
+            setSession(res.data.jwt);
             setSubmitted(0);
+            history.push("/");
           }
         );
       }
