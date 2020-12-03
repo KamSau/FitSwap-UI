@@ -8,7 +8,7 @@ export default class ClodinaryWidget2 extends Component {
 
     this.state = { publicUrl: "default-user-img.jpg" };
 
-    // Defined as local variable
+	// Defined as local variable
     this.widget = window.cloudinary.createUploadWidget(
       {
         cloudName: "esalomc",
@@ -20,6 +20,7 @@ export default class ClodinaryWidget2 extends Component {
         if (!error && result && result.event === "success") {
           console.log("Done! Here is the image info: ", result.info);
           this.setState({ publicUrl: result.info.path });
+		  props.setUrl(result.info.secure_url);
         }
       }
     );
@@ -48,14 +49,6 @@ export default class ClodinaryWidget2 extends Component {
             className="image-upload__container"
           ></Image>
         </div>
-        <Input
-          type="text"
-          placeholder="Image"
-          id="profile_pic"
-          className="input image-upload__input"
-          hidden={true}
-          value={this.state.publicUrl}
-        />
       </div>
     );
   }
