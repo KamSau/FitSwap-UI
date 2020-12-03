@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Form from "../../components/form/Form";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
@@ -16,10 +16,12 @@ export default function UserRegistry({}) {
   const [password,setPassword] = useState("");
   const [passwordConf,setPasswordConf] = useState("");
   const [cellphone,setCellphone] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(0);
 
-  let sendRegistry = () => {
-    let pusername = username;
+  useEffect(
+    () => {
+      if(submitted === 1){
+        let pusername = username;
     let pname = name;
     let plast_name = lastName;
     let pmiddle_name = middleName;
@@ -29,11 +31,10 @@ export default function UserRegistry({}) {
     let ppasswordConf = passwordConf;
     let pidentification = identification;
 
-    let user = {username: pusername, name: pname, last_name: plast_name, middle_name: pmiddle_name, email: pemail, cellphone: ptelephone, password: ppassword, identification: pidentification, description: ""}
-    
+    let user = {username: pusername, name: pname, last_name: plast_name, middle_name: pmiddle_name, email: pemail, cellphone: ptelephone, password: ppassword, identification: pidentification, description: "", img_url: "default-user-image.jpg"}
     console.log(user);
     let valid = false;
-    if(password === passwordConf){
+    if(password === passwordConf && password !== ""){
       valid = validate(user);
     if(valid){
       let data = user
@@ -41,21 +42,25 @@ export default function UserRegistry({}) {
         method: 'POST',
         url: "http://localhost:5000/api/v1/user",
         data: data
-      }).then(
-        sendCreds()
+      }).then(() => {
+        // setCellphone("")
+        // setEmail("")
+        // setIdentification("")
+        // setLastName("")
+        // setMiddleName("")
+        // setName("")
+        // setPassword("")
+        // setPasswordConf("")
+        // setSubmitted(false);
+        // setUsername("");
+        setSubmitted(1);
+      }
       )
     }
     }
-  }
-
-  let sendCreds = () =>{
-    let creds = {password: password, username: username}
-    Axios({
-      method: 'POST',
-      url: "http://localhost:5000/api/v1/credentials",
-      data: creds
-    })
-  }
+      }
+    }, [submitted]
+  )
 
   let validate = (user) => {
     let valid = false;
@@ -69,7 +74,9 @@ export default function UserRegistry({}) {
 
   return (
     <div className={"login__container--" + modifier}>
-      <Form modifier="base" label="Create Account" onSubmitF={sendRegistry()}>
+      <Form modifier="base" label="Create Account" onSubmitF={(e) => {
+        e.preventDefault();
+        setSubmitted(1)}}>
         <Input
           id="username"
           name="username"
@@ -174,7 +181,7 @@ export default function UserRegistry({}) {
           type="submit"
           modifier="base"
           onSubmitF={(e) => {
-            e.preventDefalt();
+            e.preventDefault();
             setSubmitted(true);
           }}
         />
