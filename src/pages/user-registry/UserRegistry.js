@@ -196,7 +196,7 @@ export default function UserRegistry({history}) {
           }}
         />
         <Button
-          text="Log in"
+          text="Sign up"
           type="submit"
           modifier="base"
           onSubmitF={(e) => {
