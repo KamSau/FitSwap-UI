@@ -2,13 +2,27 @@ import React, { useEffect, useState, useContext } from "react";
 import Form from "../../components/form/Form";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import Axios from "axios";
+import axios from "axios";
 import CloudinaryWidget from "../../components/cloudinary-widget/CloudinaryWidget";
 import { SessionContext } from "../../helpers/SessionContext";
 
 export default function PostRegistry({ history }) {
   let modifier = "base";
+  const [state, setState] = useState({
+    username: "",
+    name: "",
+    last_name: "",
+    middle_name: "",
+    email: "",
+    cellphone: "",
+    password: "",
+    identification: "",
+    description: "",
+    url: "",
+    id: "",
+  });
 
+  const [fetched, setFetched] = useState("");
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -17,6 +31,19 @@ export default function PostRegistry({ history }) {
 
   const { session, setSession } = useContext(SessionContext);
 
+  useEffect(() => {
+    if (fetched !== "connected") {
+      axios
+        .get(`http://localhost:5000/api/v1/user`, {
+          headers: { Authorization: "Bearer " + session },
+        })
+        .then((res) => {
+          setState(res.data);
+          setFetched("connected");
+          console.log(fetched);
+        });
+    }
+  }, [fetched]);
   useEffect(() => {
     console.log("PRESSED", pressed);
     if (pressed == 1) {
@@ -29,22 +56,24 @@ export default function PostRegistry({ history }) {
         url: purl,
         title: ptitle,
         description: pdescription,
-        userId: 1,
+        userId: state.id,
       };
       console.log(post);
       let valid = false;
       valid = validate(post);
       if (valid) {
-        Axios.post("http://localhost:5000/api/v1/post", post, {
-          headers: { Authorization: { Bearer: session } },
-        }).then((res) => {
-          console.log(res.data);
-          setPressed(0);
-          history.push("/profile/ksauma");
-        });
+        axios
+          .post("http://localhost:5000/api/v1/post", post, {
+            headers: { Authorization: { Bearer: session } },
+          })
+          .then((res) => {
+            console.log(res.data);
+            setPressed(0);
+            history.push("/profile");
+          });
       }
     }
-  }, [pressed]);
+  }, [pressed, state]);
 
   let validate = (user) => {
     let valid = false;

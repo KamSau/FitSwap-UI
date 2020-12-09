@@ -6,19 +6,20 @@ import axios from "axios";
 import CloudinaryWidget from "../../components/cloudinary-widget/CloudinaryWidget";
 import { SessionContext } from "../../helpers/SessionContext";
 
-
-export default function UserUpdate({history}) {
+export default function UserUpdate({ history }) {
   let modifier = "base";
-  const [state, setState] = useState({username: "",
+  const [state, setState] = useState({
+    username: "",
     name: "",
-    last_name: "",
+    lastName: "",
     middle_name: "",
     email: "",
     cellphone: "",
     password: "",
     identification: "",
     description: "",
-    url: "",});
+    img_url: "",
+  });
   const [url, setUrl] = useState("");
   const [fetched, setFetched] = useState("");
   const [name, setName] = useState("");
@@ -32,23 +33,24 @@ export default function UserUpdate({history}) {
   const [submitted, setSubmitted] = useState(false);
   const { session, setSession } = useContext(SessionContext);
 
-/*
+  /*
   window.onload = function (){
     
   }*/
 
   useEffect(() => {
     if (fetched !== "connected") {
-      axios.get(`http://localhost:5000/api/v1/user`, {
-        headers: { Authorization: "Bearer " + session },
-      })
-      .then((res) => {
+      axios
+        .get(`http://localhost:5000/api/v1/user`, {
+          headers: { Authorization: "Bearer " + session },
+        })
+        .then((res) => {
           setState(res.data);
-          setFetched("connected");   
+          setFetched("connected");
           console.log(fetched);
-      });
+        });
     }
-  },[fetched]);
+  }, [fetched]);
   useEffect(() => {
     console.log("PRESSED", submitted);
     if (submitted == 1) {
@@ -70,7 +72,7 @@ export default function UserUpdate({history}) {
     let user = {
       username: pusername,
       name: pname,
-      last_name: plast_name,
+      lastName: plast_name,
       middle_name: pmiddle_name,
       email: pemail,
       cellphone: ptelephone,
@@ -82,15 +84,16 @@ export default function UserUpdate({history}) {
 
     console.log(user);
     let valid = false;
-      valid = validate(user);
-      if (valid) {
-        let data = user;
-        axios.put("http://localhost:5000/api/v1/user", data).then(() => {
-          setSubmitted(0);
-          history.push("/profile/jpozuelo");
-        });
-      }
-    
+    valid = validate(user);
+    if (valid) {
+      let data = user;
+      axios.put("http://localhost:5000/api/v1/user", data).then(() => {
+        setSubmitted(0);
+        history.push("/profile/jpozuelo");
+      });
+    } else {
+      setSubmitted(0);
+    }
   };
 
   let validate = (user) => {
@@ -101,11 +104,12 @@ export default function UserUpdate({history}) {
       user.email === "" ||
       user.name === "" ||
       user.last_name === "" ||
-      user.cellphone === ""||
+      user.cellphone === "" ||
       user.url === "" ||
       submitted == 0
     ) {
       valid = false;
+      setSubmitted(0);
     } else {
       valid = true;
     }
@@ -156,12 +160,12 @@ export default function UserUpdate({history}) {
             setMiddleName(e.target.value);
           }}
         />
-         <Input
+        <Input
           id="last_name"
           name="last_name"
           type="text"
           label="Last Name"
-          placeholder={state.last_name}
+          placeholder={state.lastName}
           modifier="base"
           onChangeF={(e) => {
             setLastName(e.target.value);
@@ -178,7 +182,7 @@ export default function UserUpdate({history}) {
             setEmail(e.target.value);
           }}
         />
-         <Input
+        <Input
           id="identification"
           name="identification"
           type="identification"
