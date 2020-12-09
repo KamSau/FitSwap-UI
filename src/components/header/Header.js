@@ -21,11 +21,22 @@ export default function Header({ children }) {
           Log Out
         </Link>
       )}
-
-      <Link to="/register" className="header__register--base">
+      {session === "" ? (
+        <Link to="/register" className="header__register--base">
         Register
       </Link>
+      ) : (
+        <Link
+          to="/profileEdit"
+          className="header__register--base"
+          
+        >
+          Profile Edit
+        </Link>
+      )}
+      
       {children}
     </div>
   );
+  
 }

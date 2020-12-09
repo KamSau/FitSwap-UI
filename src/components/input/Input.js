@@ -5,6 +5,7 @@ export default function Input({
   id,
   type,
   placeholder,
+  value,
   modifier,
   label,
   onChangeF,
@@ -17,6 +18,7 @@ export default function Input({
       <input
         type={type}
         placeholder={placeholder}
+        value={value}
         id={id}
         name={name}
         onChange={onChangeF}
