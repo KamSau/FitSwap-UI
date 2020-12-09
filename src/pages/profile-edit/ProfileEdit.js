@@ -6,8 +6,7 @@ import axios from "axios";
 import CloudinaryWidget from "../../components/cloudinary-widget/CloudinaryWidget";
 import { SessionContext } from "../../helpers/SessionContext";
 
-
-export default function UserUpdate({history}) {
+export default function UserUpdate({ history }) {
   let modifier = "base";
   const [state, setState] = useState({id: "",
     username: "",
@@ -35,23 +34,24 @@ export default function UserUpdate({history}) {
   const [submitted, setSubmitted] = useState(false);
   const { session, setSession } = useContext(SessionContext);
 
-/*
+  /*
   window.onload = function (){
     
   }*/
 
   useEffect(() => {
     if (fetched !== "connected") {
-      axios.get(`http://localhost:5000/api/v1/user`, {
-        headers: { Authorization: "Bearer " + session },
-      })
-      .then((res) => {
+      axios
+        .get(`http://localhost:5000/api/v1/user`, {
+          headers: { Authorization: "Bearer " + session },
+        })
+        .then((res) => {
           setState(res.data);
-          setFetched("connected");   
+          setFetched("connected");
           console.log(fetched);
-      });
+        });
     }
-  },[fetched]);
+  }, [fetched]);
   useEffect(() => {
     console.log("PRESSED", submitted);
     if (submitted == 1) {
@@ -76,7 +76,7 @@ export default function UserUpdate({history}) {
       id: pid,
       username: pusername,
       name: pname,
-      last_name: plast_name,
+      lastName: plast_name,
       middle_name: pmiddle_name,
       email: pemail,
       cellphone: ptelephone,
@@ -114,6 +114,7 @@ export default function UserUpdate({history}) {
       submitted == 0
     ) {
       valid = false;
+      setSubmitted(0);
     } else {
       valid = true;
     }
@@ -175,7 +176,7 @@ export default function UserUpdate({history}) {
             setMiddleName(e.target.value);
           }}
         />
-         <Input
+        <Input
           id="last_name"
           name="last_name"
           type="text"
@@ -197,7 +198,7 @@ export default function UserUpdate({history}) {
             setEmail(e.target.value);
           }}
         />
-         <Input
+        <Input
           id="identification"
           name="identification"
           type="text"

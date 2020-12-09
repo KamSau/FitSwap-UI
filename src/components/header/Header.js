@@ -23,20 +23,29 @@ export default function Header({ children }) {
       )}
       {session === "" ? (
         <Link to="/register" className="header__register--base">
-        Register
-      </Link>
+          Register
+        </Link>
       ) : (
-        <Link
-          to="/profileEdit"
-          className="header__register--base"
-          
-        >
+        <Link to="/profileEdit" className="header__register--base">
           Profile Edit
         </Link>
       )}
-      
+      {session === "" ? (
+        <Link to="/" className="header__register--base"></Link>
+      ) : (
+        <Link to="/profile" className="header__register--base">
+          Profile
+        </Link>
+      )}
+      {session === "" ? (
+        <Link to="/" className="header__register--base"></Link>
+      ) : (
+        <Link to="/newPost" className="header__register--base">
+          NewPost
+        </Link>
+      )}
+
       {children}
     </div>
   );
-  
 }

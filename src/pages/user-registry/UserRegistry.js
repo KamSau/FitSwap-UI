@@ -4,7 +4,7 @@ import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import Axios from "axios";
 
-export default function UserRegistry({history}) {
+export default function UserRegistry({ history }) {
   let modifier = "base";
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -52,7 +52,8 @@ export default function UserRegistry({history}) {
       password: ppassword,
       identification: pidentification,
       description: "",
-      img_url: "",
+      img_url:
+        "https://res.cloudinary.com/esalomc/image/upload/v1582659946/default-user-img.jpg",
     };
 
     console.log(user);

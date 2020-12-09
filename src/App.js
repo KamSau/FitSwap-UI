@@ -29,7 +29,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route path="/newPost" component={PostRegistry} />
               <Route path="/post/:username/:post" component={Post} />
-              <Route path="/profile/:username" component={UserProfile} />
+              <Route path="/profile" component={UserProfile} />
               <Route path="/profileEdit" component={ProfileEdit} />
             </div>
             {session !== "" ? <Footer></Footer> : <div />}
