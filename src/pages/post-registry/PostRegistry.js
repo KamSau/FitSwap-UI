@@ -34,7 +34,7 @@ export default function PostRegistry({ history }) {
   useEffect(() => {
     if (fetched !== "connected") {
       axios
-        .get(`http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/user`, {
+        .get(`https://fitswapbackend.herokuapp.com/api/v1/user`, {
           headers: { Authorization: "Bearer " + session },
         })
         .then((res) => {
@@ -63,7 +63,7 @@ export default function PostRegistry({ history }) {
       valid = validate(post);
       if (valid) {
         axios
-          .post("http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/post", post, {
+          .post("https://fitswapbackend.herokuapp.com/api/v1/post", post, {
             headers: { Authorization: { Bearer: session } },
           })
           .then((res) => {

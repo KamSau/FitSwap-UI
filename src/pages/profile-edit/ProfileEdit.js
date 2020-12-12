@@ -41,7 +41,7 @@ export default function UserUpdate({ history }) {
   useEffect(() => {
     if (fetched !== "connected") {
       axios
-        .get(`http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/user`, {
+        .get(`https://fitswapbackend.herokuapp.com/api/v1/user`, {
           headers: { Authorization: "Bearer " + session },
         })
         .then((res) => {
@@ -87,7 +87,7 @@ export default function UserUpdate({ history }) {
     valid = validate(user);
     if (valid) {
       let data = user;
-      axios.put("http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/user", data).then(() => {
+      axios.put("https://fitswapbackend.herokuapp.com/api/v1/user", data).then(() => {
         setSubmitted(0);
         history.push("/profile/jpozuelo");
       });
