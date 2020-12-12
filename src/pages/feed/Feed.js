@@ -35,10 +35,10 @@ export default function Feed() {
                       <span className="visually-hidden">Gallery</span>
                       <i className="fas fa-clone" aria-hidden="true" />
                     </div>
+                    <div className="feed__image-overlay--base">
+                      {value.description}
+                    </div>
                   </Link>
-                  <div className="profile__image-description--base">
-                    {value.description}
-                  </div>
                 </div>
               );
             });

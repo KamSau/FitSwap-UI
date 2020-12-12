@@ -85,9 +85,7 @@ export default function Post({}) {
     } else {
       return (
         <div className="perfilFont">
-          <header>
-            <h1 className="App">Post no existe</h1>
-          </header>
+          <div className="loader" />
         </div>
       );
     }

@@ -112,7 +112,6 @@ export default function UserProfile({}) {
             <div className="container">
               <div className="gallery">{items}</div>
               {/* End of gallery */}
-              <div className="loader" />
             </div>
             {/* End of container */}
           </main>
@@ -122,7 +121,7 @@ export default function UserProfile({}) {
       return (
         <div className="perfilFont">
           <header>
-            <h1 className="App">Usuario no existe</h1>
+            <div className="loader" />
           </header>
         </div>
       );
