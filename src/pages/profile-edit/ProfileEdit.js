@@ -93,7 +93,7 @@ export default function UserUpdate({ history }) {
         let data = user;
         axios.put(`http://localhost:5000/api/v1/user`, data).then(() => {
           setSubmitted(0);
-          history.push("/profile/jpozuelo");
+          history.push("/profile");
         });
       }
     
