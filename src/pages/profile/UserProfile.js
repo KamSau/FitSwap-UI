@@ -72,7 +72,7 @@ export default function UserProfile({}) {
             <div className="container">
               <div className="profile">
                 <div className="profile-image">
-                  <img src={perfil.img_url} alt="" />
+                  <img src={perfil.image} alt="" />
                 </div>
                 <div className="profile-user-settings">
                   <h1 className="profile-user-name">{perfil.username}</h1>
