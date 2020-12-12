@@ -28,17 +28,45 @@ export default function Feed() {
               console.log(res.data);
               username = res.data.username;
               it.push(
-                <div className="gallery-item" tabIndex={0} key={value.id}>
-                  <Link to={"/post/" + username + "/" + value.id}>
-                    <img src={value.url} className="gallery-image" alt="" />
-                    <div className="gallery-item-type">
-                      <span className="visually-hidden">Gallery</span>
-                      <i className="fas fa-clone" aria-hidden="true" />
+                <div className="feed__item-container feed__item-container--base">
+                  <div
+                    className="feed__item feed__item--base"
+                    tabIndex={0}
+                    key={value.id}
+                  >
+                    <div className="feed__poster-info--base">
+                      <div className="image">
+                        <Link to={"/profile/" + res.data.username}>
+                          <img
+                            src={res.data.image}
+                            className="feed__poster-image--base"
+                          />
+                        </Link>
+                      </div>
+                      <div className="id">
+                        <Link
+                          to={"/profile/" + res.data.username}
+                          className="feed__poster-username--base"
+                        >
+                          {res.data.username}
+                        </Link>
+                      </div>
                     </div>
-                    <div className="feed__image-overlay--base">
-                      {value.description}
-                    </div>
-                  </Link>
+                    <Link to={"/post/" + username + "/" + value.id}>
+                      <img
+                        src={value.url}
+                        className="gallery-image"
+                        alt={value.description}
+                      />
+                      <div className="gallery-item-type">
+                        <span className="visually-hidden">Gallery</span>
+                        <i className="fas fa-clone" aria-hidden="true" />
+                      </div>
+                      <div className="feed__image-overlay--base">
+                        {value.description}
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               );
             });

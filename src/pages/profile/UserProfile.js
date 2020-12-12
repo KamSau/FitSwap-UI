@@ -40,9 +40,6 @@ export default function UserProfile({}) {
                       <i className="fas fa-clone" aria-hidden="true" />
                     </div>
                   </Link>
-                  <div className="profile__image-description--base">
-                    {value.description}
-                  </div>
                 </div>
               );
             }

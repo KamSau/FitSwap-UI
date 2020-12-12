@@ -106,7 +106,13 @@ html {
 
 .app__container--base {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  background-color: #ffffff; }
+
+.app__container--dark {
+  width: 100%;
+  height: 100%;
+  background-color: #282727; }
 
 .app__content--base {
   padding-top: 5%;
@@ -115,6 +121,8 @@ html {
 
 .profile-image,
 .profile-image > img {
+  display: flex;
+  justify-content: center;
   min-width: 100px;
   min-height: 100px; }
 
@@ -124,7 +132,15 @@ html {
   color: #000; }
 
 .gallery-item {
-  position: relative; }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff; }
+
+.gallery-item > a {
+  width: 100%;
+  height: 88%;
+  display: flex; }
 
 .gallery-item:hover .feed__image-overlay--base {
   opacity: 1; }
@@ -134,13 +150,51 @@ html {
   align-self: center;
   width: auto;
   max-width: 90%; }
+  .feed__item--base {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    height: 100%; }
+    .feed__item--base > a {
+      width: 100%;
+      height: 88%;
+      display: flex; }
+  .feed__item--dark {
+    background-color: #282727; }
+  .feed__item-container--base {
+    display: flex;
+    flex-direction: column; }
+  .feed__poster-info--base {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3%;
+    margin: 1% 0%;
+    height: 10%;
+    text-decoration: none;
+    box-sizing: border-box; }
+  .feed__poster-username--base {
+    text-decoration: none;
+    font-weight: bold;
+    color: #282727; }
+  .feed__poster-username--dark {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ffffff; }
+  .feed__poster-image--base {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px; }
   .feed__image-overlay--base {
     position: absolute;
-    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100%;
+    height: 88.5%;
     width: 100%;
     opacity: 0;
     transition: 0.5s ease;
@@ -152,7 +206,6 @@ html {
     font-size: 3rem; }
     .feed__image-overlay--base:hover {
       width: 100%;
-      height: 100%;
       opacity: 1; }
 
 @media (max-width: 600px) {

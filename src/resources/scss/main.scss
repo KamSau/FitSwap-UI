@@ -24,6 +24,12 @@ html {
     &--base {
       width: 100%;
       height: 100%;
+      background-color: #ffffff;
+    }
+    &--dark {
+      width: 100%;
+      height: 100%;
+      background-color: #282727;
     }
   }
   &__content {
@@ -37,6 +43,8 @@ html {
 
 .profile-image,
 .profile-image > img {
+  display: flex;
+  justify-content: center;
   min-width: 100px;
   min-height: 100px;
 }
@@ -53,6 +61,14 @@ html {
 
 .gallery-item {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+.gallery-item > a {
+  width: 100%;
+  height: 88%;
+  display: flex;
 }
 
 .gallery-item:hover .feed__image-overlay--base {
@@ -65,14 +81,77 @@ html {
   width: auto;
   max-width: 90%;
 
+  &__item {
+    &--base {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      //background-color: #282727;
+      background-color: #ffffff;
+      height: 100%;
+
+      & > a {
+        width: 100%;
+        height: 88%;
+        display: flex;
+      }
+    }
+    &--dark {
+      background-color: #282727;
+    }
+  }
+
+  &__item-container {
+    &--base {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__poster-info {
+    &--base {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 3%;
+      margin: 1% 0%;
+      height: 10%;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+  }
+
+  &__poster-username {
+    &--base {
+      text-decoration: none;
+      font-weight: bold;
+      color: #282727;
+    }
+    &--dark {
+      text-decoration: none;
+      font-weight: bold;
+      color: #ffffff;
+    }
+  }
+
+  &__poster-image {
+    &--base {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+
   &__image-overlay {
     &--base {
       position: absolute;
-      top: 0;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 100%;
+      height: 88.5%;
       width: 100%;
       opacity: 0;
       transition: 0.5s ease;
@@ -85,7 +164,6 @@ html {
 
       &:hover {
         width: 100%;
-        height: 100%;
         opacity: 1;
       }
     }
