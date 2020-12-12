@@ -17,7 +17,7 @@ export default function MyProfile({}) {
   const fetchData = async () => {
     if (asked) return;
     const res = await axios
-      .get("http://localhost:5000/api/v1/user/", {
+      .get("http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/user/", {
         headers: { Authorization: "Bearer " + session },
       })
       .then(async (response) => {
@@ -26,7 +26,7 @@ export default function MyProfile({}) {
         setPerfil(response.data);
 
         await axios
-          .get("http://localhost:5000/api/v1/post/" + response.data.id)
+          .get("http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/post/" + response.data.id)
           .then((responseP) => {
             console.log(responseP.data);
             setAsked(1);

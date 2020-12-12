@@ -17,14 +17,14 @@ export default function UserProfile({}) {
   const fetchData = async () => {
     if (asked) return;
     const res = await axios
-      .get("http://localhost:5000/api/v1/user/" + username)
+      .get("http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/user/" + username)
       .then(async (response) => {
         console.log(response.data);
         setAsked(1);
         setPerfil(response.data);
 
         await axios
-          .get("http://localhost:5000/api/v1/post/" + response.data.id)
+          .get("http://fitswapbackend-env.eba-zdurp42b.us-east-2.elasticbeanstalk.com/api/v1/post/" + response.data.id)
           .then((responseP) => {
             console.log(responseP.data);
             setAsked(1);
