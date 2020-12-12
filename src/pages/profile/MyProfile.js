@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { SessionContext } from "../../helpers/SessionContext";
 
-export default function UserProfile({}) {
+export default function MyProfile({}) {
   const [perfil, setPerfil] = useState([]);
   const [posts, setPosts] = useState([]);
   const [asked, setAsked] = useState(0);
@@ -17,7 +17,9 @@ export default function UserProfile({}) {
   const fetchData = async () => {
     if (asked) return;
     const res = await axios
-      .get("http://localhost:5000/api/v1/user/" + username)
+      .get("http://localhost:5000/api/v1/user/", {
+        headers: { Authorization: "Bearer " + session },
+      })
       .then(async (response) => {
         console.log(response.data);
         setAsked(1);

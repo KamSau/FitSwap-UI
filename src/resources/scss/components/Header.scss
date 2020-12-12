@@ -10,6 +10,25 @@
     }
   }
 
+  &__button-group {
+    display: flex;
+    align-self: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+
+    &--base {
+      display: flex;
+      align-self: center;
+      justify-content: flex-end;
+      height: 100%;
+      width: 100%;
+    }
+    &--logged {
+      justify-content: space-evenly;
+    }
+  }
+
   &__logo {
     &--base {
       height: 100%;
@@ -32,6 +51,15 @@
       width: 20%;
     }
   }
+  &__button {
+    &--base {
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-self: center;
+      align-content: center;
+    }
+  }
   &__register {
     &--base {
       color: #ffffff;
@@ -41,6 +69,16 @@
       align-self: center;
       justify-content: center;
       width: 20%;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    &__container {
+      &--base {
+        align-self: flex-end;
+      }
     }
   }
 }

@@ -14,6 +14,8 @@ import Post from "./pages/post/Post";
 import { SessionContext } from "./helpers/SessionContext";
 import Footer from "./components/footer/Footer";
 import ProfileEdit from "./pages/profile-edit/ProfileEdit";
+import Feed from "./pages/feed/Feed";
+import MyProfile from "./pages/profile/MyProfile";
 function App() {
   const [session, setSession] = useState("");
   const jwt = useMemo(() => ({ session, setSession }), [session, setSession]);
@@ -24,12 +26,13 @@ function App() {
           <div className="app__container--base">
             <Header></Header>
             <div className="app__content--base">
-              <Route exact path="/" component={Landing} />
+              <Route exact path="/" component={Feed} />
               <Route path="/register" component={UserRegistry} />
               <Route exact path="/login" component={Login} />
               <Route path="/newPost" component={PostRegistry} />
               <Route path="/post/:username/:post" component={Post} />
-              <Route path="/profile" component={UserProfile} />
+              <Route path="/profile/:username" component={UserProfile} />
+              <Route exact path="/profile" component={MyProfile} />
               <Route path="/profileEdit" component={ProfileEdit} />
             </div>
             {session !== "" ? <Footer></Footer> : <div />}
