@@ -3,6 +3,10 @@
 @import "../scss/components/Form.scss";
 @import "../scss/components/Header.scss";
 @import "../scss/pages/Login.scss";
+@import "../scss/pages/Feed.scss"; 
+@import "../scss/pages/Post.scss";
+@import "../scss/pages/Profile.scss";
+@import "../scss/pages/Settings.scss";
 * {
   box-sizing: border-box;
 }
@@ -13,12 +17,12 @@ html {
   width: 100%;
   height: 100%;
 }
-
+ 
 #root > div:first-child {
   width: 100%;
   height: 100%;
 }
-
+  
 .app {
   &__container {
     &--base {
@@ -37,6 +41,13 @@ html {
       padding-top: 5%;
       display: flex;
       flex-direction: column;
+    }
+
+    &--dark {
+      padding-top: 5%;
+      display: flex;
+      flex-direction: column;
+      background-color: #282727;
     }
   }
 }
@@ -63,112 +74,16 @@ html {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-}
+}  
 .gallery-item > a {
   width: 100%;
   height: 88%;
-  display: flex;
+  display: flex; 
 }
 
 .gallery-item:hover .feed__image-overlay--base {
   opacity: 1;
-}
-
-.feed {
-  margin: 0;
-  align-self: center;
-  width: auto;
-  max-width: 90%;
-
-  &__item {
-    &--base {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      //background-color: #282727;
-      background-color: #ffffff;
-      height: 100%;
-
-      & > a {
-        width: 100%;
-        height: 88%;
-        display: flex;
-      }
-    }
-    &--dark {
-      background-color: #282727;
-    }
-  }
-
-  &__item-container {
-    &--base {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-
-  &__poster-info {
-    &--base {
-      display: flex;
-      flex-direction: row;
-      align-content: center;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 3%;
-      margin: 1% 0%;
-      height: 10%;
-      text-decoration: none;
-      box-sizing: border-box;
-    }
-  }
-
-  &__poster-username {
-    &--base {
-      text-decoration: none;
-      font-weight: bold;
-      color: #282727;
-    }
-    &--dark {
-      text-decoration: none;
-      font-weight: bold;
-      color: #ffffff;
-    }
-  }
-
-  &__poster-image {
-    &--base {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-  }
-
-  &__image-overlay {
-    &--base {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 88.5%;
-      width: 100%;
-      opacity: 0;
-      transition: 0.5s ease;
-      background-color: #181818c9;
-      color: antiquewhite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-
-      &:hover {
-        width: 100%;
-        opacity: 1;
-      }
-    }
-  }
-}
+} 
 
 @media (max-width: 600px) {
   .profile-image,

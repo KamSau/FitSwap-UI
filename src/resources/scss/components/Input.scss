@@ -4,9 +4,18 @@
       display: flex;
       flex-direction: column;
     }
+    &--dark {
+      display: flex;
+      flex-direction: column;
+    }
   }
   &__label {
     &--base {
+      color: #121212;
+    }
+
+    &--dark {
+      color: #ffffff;
     }
   }
 }

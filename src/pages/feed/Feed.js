@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { SessionContext } from "../../helpers/SessionContext";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import { SettingsContext } from "../../helpers/SettingsContext";
 export default function Feed() {
   const [perfil, setPerfil] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -9,6 +10,7 @@ export default function Feed() {
   const [asked2, setAsked2] = useState(0);
   const [items, setItems] = useState([]);
   const { session, setSession } = useContext(SessionContext);
+  const { settings, setSettings } = useContext(SettingsContext)
   const it = [];
 
   const fetchData = async () => {
@@ -30,7 +32,7 @@ export default function Feed() {
               it.push(
                 <div className="feed__item-container feed__item-container--base">
                   <div
-                    className="feed__item feed__item--base"
+                    className={"feed__item feed__item--" + settings.display}
                     tabIndex={0}
                     key={value.id}
                   >
@@ -46,7 +48,7 @@ export default function Feed() {
                       <div className="id">
                         <Link
                           to={"/profile/" + res.data.username}
-                          className="feed__poster-username--base"
+                          className={"feed__poster-username--"+ settings.display}
                         >
                           {res.data.username}
                         </Link>

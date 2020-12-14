@@ -4,12 +4,14 @@ import Form from "../../components/form/Form";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { SessionContext } from "../../helpers/SessionContext";
+import { SettingsContext } from "../../helpers/SettingsContext";
 
 export default function Login({ history }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [submitted, setSubmitted] = useState(0);
   const { session, setSession } = useContext(SessionContext);
+  const { settings } = useContext(SettingsContext);
   useEffect(() => {
     console.log("PRESSED", submitted);
     if (submitted == 1) {
@@ -47,9 +49,9 @@ export default function Login({ history }) {
   };
   let modifier = "base";
   return (
-    <div className={"login__container--" + modifier}>
+    <div className={"login__container--" + settings.display}>
       <Form
-        modifier="base"
+        modifier={settings.display}
         label="Log in"
         onSubmitF={(e) => {
           e.preventDefault();
@@ -62,7 +64,7 @@ export default function Login({ history }) {
           type="username"
           label="Username"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setUsername(e.target.value);
           }}
@@ -73,7 +75,7 @@ export default function Login({ history }) {
           type="password"
           label="Password"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setPassword(e.target.value);
           }}
@@ -81,7 +83,7 @@ export default function Login({ history }) {
         <Button
           text="Log in"
           type="button"
-          modifier="base"
+          modifier={settings.display}
           onSubmitF={(e) => {
             e.preventDefault();
             setSubmitted(1);

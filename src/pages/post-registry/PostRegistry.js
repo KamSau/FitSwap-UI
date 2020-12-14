@@ -5,6 +5,7 @@ import Button from "../../components/button/Button";
 import axios from "axios";
 import CloudinaryWidget from "../../components/cloudinary-widget/CloudinaryWidget";
 import { SessionContext } from "../../helpers/SessionContext";
+import { SettingsContext } from "../../helpers/SettingsContext";
 
 export default function PostRegistry({ history }) {
   let modifier = "base";
@@ -30,6 +31,7 @@ export default function PostRegistry({ history }) {
   const [pressed, setPressed] = useState(0);
 
   const { session, setSession } = useContext(SessionContext);
+  const { settings } = useContext(SettingsContext);
 
   useEffect(() => {
     if (fetched !== "connected") {
@@ -93,7 +95,7 @@ export default function PostRegistry({ history }) {
 
   return (
     <div className={"login__container--" + modifier}>
-      <Form modifier="base" label="New Post">
+      <Form modifier={settings.display} label="New Post">
         <CloudinaryWidget setUrl={setUrl}></CloudinaryWidget>
 
         <Input
@@ -102,7 +104,7 @@ export default function PostRegistry({ history }) {
           type="text"
           label="Title"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setTitle(e.target.value);
           }}
@@ -113,7 +115,7 @@ export default function PostRegistry({ history }) {
           type="text"
           label="Description"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setDescription(e.target.value);
           }}
@@ -121,7 +123,7 @@ export default function PostRegistry({ history }) {
         <Button
           text="Post"
           type="submit"
-          modifier="base"
+          modifier={settings.display}
           onSubmitF={(event) => {
             event.preventDefault();
             setPressed(1);

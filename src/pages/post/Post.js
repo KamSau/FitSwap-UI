@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
+import { SettingsContext } from "../../helpers/SettingsContext";
 export default function Post({}) {
   const [perfil, setPerfil] = useState({});
   const [actualPost, setActualPost] = useState({});
@@ -8,7 +9,7 @@ export default function Post({}) {
   const [asked2, setAsked2] = useState(0);
   const [items, setItems] = useState([]);
   const it = [];
-
+  const {settings} = useContext(SettingsContext);
   let { username, post } = useParams();
 
   const fetchData = async () => {
@@ -50,27 +51,28 @@ export default function Post({}) {
     }
     if (actualPost && actualPost.url) {
       return (
-        <div className="feed">
-          <section className="username">
-            <div className="image">
+        <div className={"feed post__container--"+ settings.display}>
+          <section className="username post_poster-info--base">
+            <div className="image post__poster-image--base">
               <Link to={"/profile/" + username}>
                 <img src={perfil.image} />
               </Link>
             </div>
-            <div className="id">
+            <div className={"id post__poster-username--" + settings.display}>
               <Link to={"/profile/" + username}>{perfil.username}</Link>
             </div>
           </section>
           <section className="post">
             <img src={actualPost.url} />
           </section>
-          <section className="caption">
+          <section className={"caption post__caption-container--" + settings.display}>
             <p>
               <Link
                 to={"/profile/" + username}
                 style={{ textDecoration: "none" }}
+                className={"post__caption-username--" + settings.display}
               >
-                <b className="id">{perfil.username}</b>
+                <b className={"post__caption-username--" + settings.display}>{perfil.username}</b>
               </Link>
             </p>
             <p>

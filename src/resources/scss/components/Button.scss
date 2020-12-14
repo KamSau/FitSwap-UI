@@ -4,12 +4,29 @@
       margin-top: 10%;
       width: 100%;
       margin-top: 2%;
+      background-color: #ffffff;
+    }
+    &--dark {
+      margin-top: 10%;
+      width: 100%;
+      margin-top: 2%;
+      background-color: #ffffff;
     }
   }
 
   &__content {
     &--base {
       width: 100%;
+      background-color: #16bfc4;
+      color: #ffffff;
+      padding: 2%;
     }
+    &--dark {
+      width: 100%;
+      background-color: #16bfc4;
+      color: #ffffff;
+      padding: 2%;  
+    }
+
   }
 }
