@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { SessionContext } from "../../helpers/SessionContext";
-import Settings from "../settings/Settings";
 import { SettingsContext } from "../../helpers/SettingsContext";
 
 export default function UserProfile({}) {
@@ -32,10 +31,16 @@ export default function UserProfile({}) {
             console.log(responseP.data);
             setAsked(1);
             setPosts(responseP.data);
- 
+
             for (const [index, value] of responseP.data.entries()) {
-              it.push( 
-                <div className={"gallery-item profile__post-container--"+ settings.display } tabIndex={0} key={value.id}>
+              it.push(
+                <div
+                  className={
+                    "gallery-item profile__post-container--" + settings.display
+                  }
+                  tabIndex={0}
+                  key={value.id}
+                >
                   <Link to={"/post/" + response.data.username + "/" + value.id}>
                     <img src={value.url} className="gallery-image" alt="" />
                     <div className="gallery-item-type">
@@ -75,7 +80,9 @@ export default function UserProfile({}) {
                   <img src={perfil.image} alt="" />
                 </div>
                 <div className="profile-user-settings">
-                  <h1 className={"profile__username--" + settings.display}>{perfil.username}</h1>
+                  <h1 className={"profile__username--" + settings.display}>
+                    {perfil.username}
+                  </h1>
                   {/*
 							<button className="btn profile-edit-btn">Edit Profile</button>
 							*/}

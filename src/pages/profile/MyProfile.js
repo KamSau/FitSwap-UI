@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { SessionContext } from "../../helpers/SessionContext";
+import { SettingsContext } from "../../helpers/SettingsContext";
 
 export default function MyProfile({}) {
   const [perfil, setPerfil] = useState([]);
@@ -10,6 +11,7 @@ export default function MyProfile({}) {
   const [asked2, setAsked2] = useState(0);
   const [items, setItems] = useState([]);
   const { session, setSession } = useContext(SessionContext);
+  const { settings } = useContext(SettingsContext);
   const it = [];
 
   let { username } = useParams();
@@ -34,7 +36,13 @@ export default function MyProfile({}) {
 
             for (const [index, value] of responseP.data.entries()) {
               it.push(
-                <div className="gallery-item" tabIndex={0} key={value.id}>
+                <div
+                  className={
+                    "gallery-item profile__post-container--" + settings.display
+                  }
+                  tabIndex={0}
+                  key={value.id}
+                >
                   <Link to={"/post/" + response.data.username + "/" + value.id}>
                     <img src={value.url} className="gallery-image" alt="" />
                     <div className="gallery-item-type">
@@ -74,7 +82,9 @@ export default function MyProfile({}) {
                   <img src={perfil.img_url} alt="" />
                 </div>
                 <div className="profile-user-settings">
-                  <h1 className="profile-user-name">{perfil.username}</h1>
+                  <h1 className={"profile__username--" + settings.display}>
+                    {perfil.username}
+                  </h1>
                   {/*
 							<button className="btn profile-edit-btn">Edit Profile</button>
 							*/}
@@ -94,9 +104,9 @@ export default function MyProfile({}) {
 							</ul>
 						  </div>
 						  */}
-                <div className="profile-bio">
+                <div className={"profile__description--" + settings.display}>
                   <p>
-                    <span className="profile-real-name">
+                    <span className={"profile__bio--" + settings.display}>
                       {perfil.name} {perfil.middleName} {perfil.lastName}
                     </span>{" "}
                     {perfil.description}

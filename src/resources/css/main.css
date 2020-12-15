@@ -36,6 +36,17 @@
 .input__label--dark {
   color: #ffffff; }
 
+.input__content--base {
+  margin: 1% 0%;
+  padding: 1%; }
+
+.input__content--dark {
+  background-color: #12121250;
+  color: #ffffff;
+  border: none;
+  margin: 1% 0%;
+  padding: 1%; }
+
 .form__container--base {
   display: flex;
   flex-direction: column;
@@ -69,6 +80,34 @@
 .form__content--dark {
   flex-direction: column;
   width: 80%; }
+
+.image-upload__row {
+  margin: 5% 0%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 40%; }
+
+.image-upload__button {
+  padding: 3%;
+  background-color: #16bfc4;
+  color: #ffffff; }
+
+@media (max-width: 600px) {
+  .image-upload__row {
+    margin: 5% 0%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%; }
+  .image-upload__button {
+    padding: 3%;
+    background-color: #16bfc4;
+    color: #ffffff; } }
 
 .header__container--base {
   width: 100%;

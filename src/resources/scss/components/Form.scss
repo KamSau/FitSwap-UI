@@ -42,3 +42,41 @@
     }
   }
 }
+
+.image-upload {
+  &__row {
+    margin: 5% 0%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 40%;
+  }
+
+  &__button {
+    padding: 3%;
+    background-color: #16bfc4;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 600px) {
+  .image-upload {
+    &__row {
+      margin: 5% 0%;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+    }
+
+    &__button {
+      padding: 3%;
+      background-color: #16bfc4;
+      color: #ffffff;
+    }
+  }
+}
