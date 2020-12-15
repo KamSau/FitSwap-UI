@@ -15,13 +15,13 @@ export default function Post({}) {
   const fetchData = async () => {
     if (asked) return;
     const res = await axios
-      .get("http://localhost:5000/api/v1/user/" + username)
+      .get("https://fitswapbackend.herokuapp.com/api/v1/user/" + username)
       .then(async (response) => {
         console.log(response.data);
         setAsked(1);
         setPerfil(response.data);
         await axios
-          .get("http://localhost:5000/api/v1/post/" + response.data.id)
+          .get("https://fitswapbackend.herokuapp.com/api/v1/post/" + response.data.id)
           .then((responseP) => {
             console.log(responseP.data);
             setAsked2(1);

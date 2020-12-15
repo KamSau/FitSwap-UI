@@ -25,7 +25,7 @@ export default function Login({ history }) {
       let valid = false;
       valid = validate(creds);
       if (valid) {
-        Axios.post("http://localhost:5000/api/v1/credentials", creds).then(
+        Axios.post("https://fitswapbackend.herokuapp.com/api/v1/credentials", creds).then(
           (res) => {
             console.log(res.data);
             setSession(res.data.jwt);

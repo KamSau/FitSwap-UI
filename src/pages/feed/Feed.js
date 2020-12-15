@@ -16,7 +16,7 @@ export default function Feed() {
   const fetchData = async () => {
     if (asked) return;
     const res = await axios
-      .get("http://localhost:5000/api/v1/post/")
+      .get("https://fitswapbackend.herokuapp.com/api/v1/post/")
       .then(async (responseP) => {
         console.log(responseP.data);
         setAsked(1);
@@ -25,7 +25,7 @@ export default function Feed() {
         for (const [index, value] of responseP.data.entries()) {
           let username = "";
           const res = await axios
-            .get("http://localhost:5000/api/v1/user/id/" + value.userId)
+            .get("https://fitswapbackend.herokuapp.com/api/v1/user/id/" + value.userId)
             .then((res) => {
               console.log(res.data);
               username = res.data.username;
