@@ -9,19 +9,19 @@ import { SettingsContext } from "../../helpers/SettingsContext";
 
 export default function UserUpdate({ history }) {
   let modifier = "base";
-  const [state, setState] = useState({
+  const [state, setState] = useState({id: "",
     username: "",
     name: "",
     lastName: "",
-    middle_name: "",
+    middleName: "",
     email: "",
     cellphone: "",
     password: "",
     identification: "",
     description: "",
-    img_url: "",
-  });
-  const [url, setUrl] = useState("");
+    img_url: "",});
+  const [id, setId] = useState("");
+  const [img_url, setUrl] = useState("");
   const [fetched, setFetched] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -31,7 +31,7 @@ export default function UserUpdate({ history }) {
   const [identification, setIdentification] = useState("");
   const [password, setPassword] = useState("");
   const [cellphone, setCellphone] = useState("");
-  const [id, setId] = useState("");
+  const [description, setDescription] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const { session, setSession } = useContext(SessionContext);
   const { settings } = useContext(SettingsContext);
@@ -62,6 +62,7 @@ export default function UserUpdate({ history }) {
   }, [submitted]);
 
   let sendUpdate = () => {
+    let pid = id;
     let pusername = username;
     let pname = name;
     let plast_name = lastName;
@@ -70,10 +71,11 @@ export default function UserUpdate({ history }) {
     let ptelephone = cellphone;
     let ppassword = password;
     let pidentification = identification;
-	let purl = url;
-	let pid = id;
+    let pdescription = description;
+    let purl = img_url;
 
     let user = {
+      id: pid,
       username: pusername,
       name: pname,
       lastName: plast_name,
@@ -82,35 +84,35 @@ export default function UserUpdate({ history }) {
       cellphone: ptelephone,
       password: ppassword,
       identification: pidentification,
-      description: "",
-	  url: purl,
-	  id: pid
+      description: pdescription,
+      img_url: purl
     };
 
     console.log(user);
     let valid = false;
-    valid = validate(user);
-    if (valid) {
-      let data = user;
-      axios.put("https://fitswapbackend.herokuapp.com/api/v1/user", data).then(() => {
-        setSubmitted(0);
-        history.push("/profile");
-      });
-    } else {
-      setSubmitted(0);
-    }
+      valid = validate(user);
+      if (valid) {
+        let data = user;
+        axios.put(`http://localhost:5000/api/v1/user`, data).then(() => {
+          setSubmitted(0);
+          history.push("/profile");
+        });
+      }
+    
   };
 
   let validate = (user) => {
     let valid = false;
     if (
+      user.id === "" ||
       user.username === "" ||
-      user.password === "" ||
       user.email === "" ||
       user.name === "" ||
       user.last_name === "" ||
-      user.cellphone === "" ||
-      user.url === "" ||
+      user.cellphone === ""||
+      user.password === ""||
+      user.description === ""||
+      user.img_url === "" ||
       submitted == 0
     ) {
       valid = false;
@@ -132,6 +134,17 @@ export default function UserUpdate({ history }) {
         }}
       >
         <CloudinaryWidget setUrl={setUrl}></CloudinaryWidget>
+        <Input
+          id="id"
+          name="id"
+          type="text"
+          label="Id"
+          value={state.id}
+          modifier={settings.display}
+          onChangeF={(e) => {
+            setId(e.target.value);
+          }}
+        />
         <Input
           id="username"
           name="username"
@@ -190,7 +203,7 @@ export default function UserUpdate({ history }) {
         <Input
           id="identification"
           name="identification"
-          type="identification"
+          type="text"
           label="Identification"
           placeholder={state.identification}
           modifier={settings.display}
@@ -198,17 +211,6 @@ export default function UserUpdate({ history }) {
             setIdentification(e.target.value);
           }}
         />
-		<Input
-		id="id"
-		name="id"
-		type="text"
-		label="Id"
-		value={state.id}
-		modifier={settings.display}
-		onChangeF={(e) => {
-		  setId(e.target.value);
-		}}
-	  	/>
         <Input
           id="password"
           name="password"
@@ -216,11 +218,23 @@ export default function UserUpdate({ history }) {
 		  hidden={true}
           label="Password"
           value={state.password}
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setPassword(e.target.value);
           }}
         />
+        <Input
+          id="description"
+          name="description"
+          type="text"
+          label="Description"
+          placeholder={state.description}
+          modifier={settings.display}
+          onChangeF={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+ 
         <Input
           id="cellphone"
           name="cellphone"
@@ -231,6 +245,7 @@ export default function UserUpdate({ history }) {
           onChangeF={(e) => {
             setCellphone(e.target.value);
           }}
+          
         />
         <Button
           text="Save"
