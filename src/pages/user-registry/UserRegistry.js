@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Form from "../../components/form/Form";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import Axios from "axios";
+import { SettingsContext } from "../../helpers/SettingsContext";
 
 export default function UserRegistry({ history }) {
   let modifier = "base";
@@ -16,6 +17,8 @@ export default function UserRegistry({ history }) {
   const [passwordConf, setPasswordConf] = useState("");
   const [cellphone, setCellphone] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  const { settings } = useContext(SettingsContext);
 
   useEffect(() => {
     console.log("PRESSED", submitted);
@@ -62,7 +65,7 @@ export default function UserRegistry({ history }) {
       valid = validate(user);
       if (valid) {
         let data = user;
-        Axios.post("http://localhost:5000/api/v1/user", data).then(() => {
+        Axios.post("https://fitswapbackend.herokuapp.com/api/v1/user", data).then(() => {
           setSubmitted(0);
           history.push("/");
         });
@@ -88,9 +91,9 @@ export default function UserRegistry({ history }) {
   };
 
   return (
-    <div className={"login__container--" + modifier}>
+    <div className={"login__container--" + settings.display}>
       <Form
-        modifier="base"
+        modifier={settings.display}
         label="Create Account"
         onSubmitF={(e) => {
           e.preventDefault();
@@ -103,7 +106,7 @@ export default function UserRegistry({ history }) {
           type="text"
           label="Username"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setUsername(e.target.value);
           }}
@@ -114,7 +117,7 @@ export default function UserRegistry({ history }) {
           type="text"
           label="Name"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setName(e.target.value);
           }}
@@ -125,7 +128,7 @@ export default function UserRegistry({ history }) {
           type="text"
           label="Middle Name"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setMiddleName(e.target.value);
           }}
@@ -136,7 +139,7 @@ export default function UserRegistry({ history }) {
           type="text"
           label="Last Name"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setLastName(e.target.value);
           }}
@@ -147,7 +150,7 @@ export default function UserRegistry({ history }) {
           type="email"
           label="Email"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setEmail(e.target.value);
           }}
@@ -158,7 +161,7 @@ export default function UserRegistry({ history }) {
           type="identification"
           label="Identification"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setIdentification(e.target.value);
           }}
@@ -169,7 +172,7 @@ export default function UserRegistry({ history }) {
           type="tel"
           label="Phone Number"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setCellphone(e.target.value);
           }}
@@ -180,7 +183,7 @@ export default function UserRegistry({ history }) {
           type="password"
           label="Password"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setPassword(e.target.value);
           }}
@@ -191,7 +194,7 @@ export default function UserRegistry({ history }) {
           type="password"
           label="Password Confirmation"
           placeholder=""
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setPasswordConf(e.target.value);
           }}
@@ -199,7 +202,7 @@ export default function UserRegistry({ history }) {
         <Button
           text="Sign up"
           type="submit"
-          modifier="base"
+          modifier={settings.display}
           onSubmitF={(e) => {
             e.preventDefault();
             setSubmitted(true);

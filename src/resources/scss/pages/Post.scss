@@ -1,0 +1,64 @@
+.post{
+    &__container{
+        &--base{
+            background-color: #ffffff;
+            color: #121212;
+        }
+        &--dark{
+            background-color: #121212;
+            color: #ffffff;
+        }
+    }
+
+    &__poster{
+        &-info{
+            &--base{
+
+            }
+            &--dark{
+
+            }
+        }
+
+        &-username{
+            &--base > a{
+                color:#121212;
+            }
+            &--dark > a{
+                color: #ffffff !important; 
+            }
+        }
+
+        &-image{
+            &--base{
+
+            }
+            &--dark{
+
+            }
+        }
+    }
+
+    &__caption{
+        &-container{
+            &--base> a{
+                color: #ffffff;
+            }
+
+            &--dark> a{
+                color: #ffffff;
+            }
+        }
+    }
+    &__caption{
+        &-username{
+            &--base > b{
+                color: #121212;
+            }
+
+            &--dark > b{
+                color: #ffffff;
+            }
+        }
+    }
+}

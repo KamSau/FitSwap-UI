@@ -4,9 +4,32 @@
       display: flex;
       flex-direction: column;
     }
+    &--dark {
+      display: flex;
+      flex-direction: column;
+    }
   }
   &__label {
     &--base {
+      color: #121212;
+    }
+
+    &--dark {
+      color: #ffffff;
+    }
+  }
+  &__content {
+    &--base {
+      margin: 1% 0%;
+      padding: 1%;
+    }
+
+    &--dark {
+      background-color: #12121250;
+      color: #ffffff;
+      border: none;
+      margin: 1% 0%;
+      padding: 1%;
     }
   }
 }

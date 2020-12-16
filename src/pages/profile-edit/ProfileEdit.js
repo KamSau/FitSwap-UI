@@ -5,6 +5,7 @@ import Button from "../../components/button/Button";
 import axios from "axios";
 import CloudinaryWidget from "../../components/cloudinary-widget/CloudinaryWidget";
 import { SessionContext } from "../../helpers/SessionContext";
+import { SettingsContext } from "../../helpers/SettingsContext";
 
 export default function UserUpdate({ history }) {
   let modifier = "base";
@@ -33,7 +34,7 @@ export default function UserUpdate({ history }) {
   const [description, setDescription] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const { session, setSession } = useContext(SessionContext);
-
+  const { settings } = useContext(SettingsContext);
   /*
   window.onload = function (){
     
@@ -42,7 +43,7 @@ export default function UserUpdate({ history }) {
   useEffect(() => {
     if (fetched !== "connected") {
       axios
-        .get(`http://localhost:5000/api/v1/user`, {
+        .get(`https://fitswapbackend.herokuapp.com/api/v1/user`, {
           headers: { Authorization: "Bearer " + session },
         })
         .then((res) => {
@@ -122,9 +123,9 @@ export default function UserUpdate({ history }) {
   };
 
   return (
-    <div className={"login__container--" + modifier}>
+    <div className={"login__container--" + settings.display}>
       <Form
-        modifier="base"
+        modifier={settings.display}
         label="Update Account"
         onSubmitF={(e) => {
           e.preventDefault();
@@ -149,7 +150,7 @@ export default function UserUpdate({ history }) {
           type="text"
           label="Username"
           placeholder={state.username}
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setUsername(e.target.value);
           }}
@@ -160,7 +161,7 @@ export default function UserUpdate({ history }) {
           type="text"
           label="Name"
           placeholder={state.name}
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setName(e.target.value);
           }}
@@ -182,7 +183,7 @@ export default function UserUpdate({ history }) {
           type="text"
           label="Last Name"
           placeholder={state.lastName}
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setLastName(e.target.value);
           }}
@@ -193,7 +194,7 @@ export default function UserUpdate({ history }) {
           type="email"
           label="Email"
           placeholder={state.email}
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setEmail(e.target.value);
           }}
@@ -204,7 +205,7 @@ export default function UserUpdate({ history }) {
           type="text"
           label="Identification"
           placeholder={state.identification}
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setIdentification(e.target.value);
           }}
@@ -227,7 +228,7 @@ export default function UserUpdate({ history }) {
           type="tel"
           label="Phone Number"
           placeholder={state.cellphone}
-          modifier="base"
+          modifier={settings.display}
           onChangeF={(e) => {
             setCellphone(e.target.value);
           }}
@@ -247,7 +248,7 @@ export default function UserUpdate({ history }) {
         <Button
           text="Save"
           type="submit"
-          modifier="base"
+          modifier={settings.display}
           onSubmitF={(e) => {
             e.preventDefault();
             setSubmitted(1);

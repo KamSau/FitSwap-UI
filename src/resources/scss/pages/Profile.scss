@@ -1,0 +1,40 @@
+.profile{
+    &__username{
+        &--base{
+            color: #121212;
+        }
+        &--dark{
+            color: #ffffff
+        }
+    }
+
+    &__bio{
+        &--base {
+            color: #121212;
+        }
+        &--dark {
+            color: #ffffff
+        }
+    }
+    &__description{
+        &--base {
+            font-size: 1.5em;
+            color: #121212;
+        }
+        &--dark {
+            font-size: 1.5em;
+            color: #ffffff
+        }
+    }
+
+    &__post-container{
+        &--base{
+            background-color: #ffffff;
+            color: #121212;
+        }
+        &--dark{
+            background-color: #121212;
+            color: #ffffff;
+        }
+    }
+}

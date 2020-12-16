@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { SessionContext } from "../../helpers/SessionContext";
 import { SettingsContext } from "../../helpers/SettingsContext";
 
-export default function UserProfile({}) {
+export default function MyProfile({}) {
   const [perfil, setPerfil] = useState([]);
   const [posts, setPosts] = useState([]);
   const [asked, setAsked] = useState(0);
@@ -19,7 +19,9 @@ export default function UserProfile({}) {
   const fetchData = async () => {
     if (asked) return;
     const res = await axios
-      .get("https://fitswapbackend.herokuapp.com/api/v1/user/" + username)
+      .get("https://fitswapbackend.herokuapp.com/api/v1/user/", {
+        headers: { Authorization: "Bearer " + session },
+      })
       .then(async (response) => {
         console.log(response.data);
         setAsked(1);
@@ -77,7 +79,7 @@ export default function UserProfile({}) {
             <div className="container">
               <div className="profile">
                 <div className="profile-image">
-                  <img src={perfil.image} alt="" />
+                  <img src={perfil.img_url} alt="" />
                 </div>
                 <div className="profile-user-settings">
                   <h1 className={"profile__username--" + settings.display}>

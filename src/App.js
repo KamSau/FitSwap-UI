@@ -12,30 +12,40 @@ import Landing from "./pages/landing/Landing";
 import UserProfile from "./pages/profile/UserProfile";
 import Post from "./pages/post/Post";
 import { SessionContext } from "./helpers/SessionContext";
+import { SettingsContext } from "./helpers/SettingsContext";
 import Footer from "./components/footer/Footer";
 import ProfileEdit from "./pages/profile-edit/ProfileEdit";
+import Feed from "./pages/feed/Feed";
+import MyProfile from "./pages/profile/MyProfile";
+import Settings from "./pages/settings/Settings";
 function App() {
   const [session, setSession] = useState("");
+  const [settings, setSettings] = useState({display: "dark"});
   const jwt = useMemo(() => ({ session, setSession }), [session, setSession]);
+  const config = useMemo(()=> ({settings, setSettings}), [settings, setSettings]);
   return (
     <Router>
+      <SettingsContext.Provider value={config}>
       <SessionContext.Provider value={jwt}>
         <CloudinaryContext cloudName="esalomc">
-          <div className="app__container--base">
+          <div className={"app__container app__container--" + settings.display}>
             <Header></Header>
-            <div className="app__content--base">
-              <Route exact path="/" component={Landing} />
+            <div className={"app__content app__content--" + settings.display}>
+              <Route exact path="/" component={Feed} />
               <Route path="/register" component={UserRegistry} />
               <Route exact path="/login" component={Login} />
               <Route path="/newPost" component={PostRegistry} />
               <Route path="/post/:username/:post" component={Post} />
-              <Route path="/profile" component={UserProfile} />
+              <Route path="/profile/:username" component={UserProfile} />
+              <Route exact path="/profile" component={MyProfile} />
               <Route path="/profileEdit" component={ProfileEdit} />
+              <Route path="/settings" component={Settings} />
             </div>
             {session !== "" ? <Footer></Footer> : <div />}
           </div>
         </CloudinaryContext>
       </SessionContext.Provider>
+      </SettingsContext.Provider>
     </Router>
   );
 }
