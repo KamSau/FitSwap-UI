@@ -31,6 +31,7 @@ export default function UserUpdate({ history }) {
   const [identification, setIdentification] = useState("");
   const [password, setPassword] = useState("");
   const [cellphone, setCellphone] = useState("");
+  const [id, setId] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const { session, setSession } = useContext(SessionContext);
   const { settings } = useContext(SettingsContext);
@@ -47,6 +48,7 @@ export default function UserUpdate({ history }) {
         })
         .then((res) => {
           setState(res.data);
+		  setId(res.data.id);
           setFetched("connected");
           console.log(fetched);
         });
@@ -68,7 +70,8 @@ export default function UserUpdate({ history }) {
     let ptelephone = cellphone;
     let ppassword = password;
     let pidentification = identification;
-    let purl = url;
+	let purl = url;
+	let pid = id;
 
     let user = {
       username: pusername,
@@ -80,7 +83,8 @@ export default function UserUpdate({ history }) {
       password: ppassword,
       identification: pidentification,
       description: "",
-      url: purl,
+	  url: purl,
+	  id: pid
     };
 
     console.log(user);
@@ -90,7 +94,7 @@ export default function UserUpdate({ history }) {
       let data = user;
       axios.put("https://fitswapbackend.herokuapp.com/api/v1/user", data).then(() => {
         setSubmitted(0);
-        history.push("/profile/jpozuelo");
+        history.push("/profile");
       });
     } else {
       setSubmitted(0);
@@ -155,7 +159,7 @@ export default function UserUpdate({ history }) {
           name="middle_name"
           type="text"
           label="Middle Name"
-          placeholder={state.middle_name}
+          placeholder={state.middleName}
           modifier={settings.display}
           onChangeF={(e) => {
             setMiddleName(e.target.value);
@@ -192,6 +196,29 @@ export default function UserUpdate({ history }) {
           modifier={settings.display}
           onChangeF={(e) => {
             setIdentification(e.target.value);
+          }}
+        />
+		<Input
+		id="id"
+		name="id"
+		type="text"
+		label="Id"
+		value={state.id}
+		modifier={settings.display}
+		onChangeF={(e) => {
+		  setId(e.target.value);
+		}}
+	  	/>
+        <Input
+          id="password"
+          name="password"
+		  type="password"
+		  hidden={true}
+          label="Password"
+          value={state.password}
+          modifier="base"
+          onChangeF={(e) => {
+            setPassword(e.target.value);
           }}
         />
         <Input
