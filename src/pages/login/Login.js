@@ -25,14 +25,16 @@ export default function Login({ history }) {
       let valid = false;
       valid = validate(creds);
       if (valid) {
-        Axios.post("https://fitswapbackend.herokuapp.com/api/v1/credentials", creds).then(
-          (res) => {
-            console.log(res.data);
-            setSession(res.data.jwt);
-            setSubmitted(0);
-            history.push("/");
-          }
-        );
+        Axios.post(
+          "https://fitswapbackend.herokuapp.com/api/v1/credentials",
+          creds
+        ).then((res) => {
+          console.log(res.data);
+          setSession(res.data.jwt);
+          sessionStorage.setItem("key", res.data.jwt);
+          setSubmitted(0);
+          history.push("/");
+        });
       }
     }
   }, [submitted]);

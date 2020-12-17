@@ -109,23 +109,6 @@
     background-color: #16bfc4;
     color: #ffffff; } }
 
-
-.footer__container--base {
-	width: 100%;
-	height: 5%;
-	background-color: #121212;
-	position: fixed;
-	bottom: 0;
-	display: flex;
-	align-items: center;
-	align-content: center;
-}
-
-.footer__content--base {
-	color: #fff;
-	margin-left: 1%;
-}
-
 .header__container--base {
   width: 100%;
   height: 10%;
@@ -155,7 +138,7 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url("https://res.cloudinary.com/esalomc/image/upload/v1608087758/mvgviqf2ism8vv8vj6wk.png"); }
+  background-image: url(../FitSwap.PNG); }
 
 .header__login--base {
   color: #ffffff;
@@ -181,8 +164,6 @@
   align-self: center;
   justify-content: center;
   width: 20%; }
-
-  
 
 @media (max-width: 600px) {
   .header__container--base {
@@ -217,9 +198,12 @@
     .feed__item--dark {
       background-color: #121212; }
     .feed__item > a {
+      padding: 1%;
       width: 100%;
       height: 88%;
-      display: flex; }
+      display: flex;
+      margin-top: 1%;
+      background-color: #ffffff; }
   .feed__item-container--base {
     display: flex;
     flex-direction: column; }
@@ -229,9 +213,8 @@
     align-content: center;
     align-items: center;
     justify-content: flex-start;
-    padding: 3%;
-    margin: 1% 0%;
-    height: 10%;
+    padding: 0% 2%;
+    height: 13%;
     text-decoration: none;
     box-sizing: border-box; }
   .feed__poster-username--base {
@@ -246,13 +229,14 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 10px; }
+    margin-right: 10px;
+    padding-top: 3%; }
   .feed__image-overlay--base {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 88.7%;
+    height: 86%;
     width: 100%;
     opacity: 0;
     transition: 0.5s ease;
@@ -265,6 +249,13 @@
     .feed__image-overlay--base:hover {
       width: 100%;
       opacity: 1; }
+  .feed__overlay-text--base {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center; }
 
 .post__container--base {
   background-color: #ffffff;
@@ -351,6 +342,20 @@
   .settings__item-input > div {
     margin: 0; }
 
+.footer__container--base {
+  width: 100%;
+  height: 5%;
+  background-color: #121212;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  align-content: center; }
+
+.footer__content--base {
+  color: #fff;
+  margin-left: 1%; }
+
 * {
   box-sizing: border-box; }
 
@@ -405,7 +410,9 @@ html {
 .gallery-item > a {
   width: 100%;
   height: 88%;
-  display: flex; }
+  display: flex;
+  padding: 2%;
+  background-color: #ffffff; }
 
 .gallery-item:hover .feed__image-overlay--base {
   opacity: 1; }

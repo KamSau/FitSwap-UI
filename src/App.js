@@ -19,33 +19,55 @@ import Feed from "./pages/feed/Feed";
 import MyProfile from "./pages/profile/MyProfile";
 import Settings from "./pages/settings/Settings";
 function App() {
-  const [session, setSession] = useState("");
-  const [settings, setSettings] = useState({display: "dark"});
+  const [loaded, setLoaded] = useState(0);
+  const [session, setSession] = useState(sessionStorage.getItem("key"));
+  const [settings, setSettings] = useState({ display: "base" });
   const jwt = useMemo(() => ({ session, setSession }), [session, setSession]);
-  const config = useMemo(()=> ({settings, setSettings}), [settings, setSettings]);
+  const config = useMemo(() => ({ settings, setSettings }), [
+    settings,
+    setSettings,
+  ]);
+
+  useEffect(() => {
+    if (loaded === 0) {
+      let sessionDisplay = sessionStorage.getItem("display");
+      if (
+        sessionDisplay === null ||
+        sessionDisplay === undefined ||
+        sessionDisplay === ""
+      ) {
+        setSettings({ display: "base" });
+      } else {
+        setSettings({ display: sessionDisplay });
+      }
+      setLoaded(1);
+    }
+  }, [loaded]);
   return (
     <Router>
       <SettingsContext.Provider value={config}>
-      <SessionContext.Provider value={jwt}>
-        <CloudinaryContext cloudName="esalomc">
-          <div className={"app__container app__container--" + settings.display}>
-            <Header></Header>
-            <div className={"app__content app__content--" + settings.display}>
-              <Route exact path="/" component={Feed} />
-              <Route path="/register" component={UserRegistry} />
-              <Route exact path="/login" component={Login} />
-              <Route path="/newPost" component={PostRegistry} />
-              <Route path="/post/:username/:post" component={Post} />
-              <Route path="/profile/:username" component={UserProfile} />
-              <Route exact path="/profile" component={MyProfile} />
-              <Route path="/profileEdit" component={ProfileEdit} />
-              <Route path="/settings" component={Settings} />
+        <SessionContext.Provider value={jwt}>
+          <CloudinaryContext cloudName="esalomc">
+            <div
+              className={"app__container app__container--" + settings.display}
+            >
+              <Header></Header>
+              <div className={"app__content app__content--" + settings.display}>
+                <Route exact path="/" component={Feed} />
+                <Route path="/register" component={UserRegistry} />
+                <Route exact path="/login" component={Login} />
+                <Route path="/newPost" component={PostRegistry} />
+                <Route path="/post/:username/:post" component={Post} />
+                <Route path="/profile/:username" component={UserProfile} />
+                <Route exact path="/profile" component={MyProfile} />
+                <Route path="/profileEdit" component={ProfileEdit} />
+                <Route path="/settings" component={Settings} />
+              </div>
+              {session !== "" ? <Footer></Footer> : <div />}
             </div>
-            {session !== "" ? <Footer></Footer> : <div />}
-          </div>
-		  <Footer></Footer>
-        </CloudinaryContext>
-      </SessionContext.Provider>
+            <Footer></Footer>
+          </CloudinaryContext>
+        </SessionContext.Provider>
       </SettingsContext.Provider>
     </Router>
   );

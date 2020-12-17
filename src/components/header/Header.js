@@ -7,7 +7,7 @@ export default function Header({ children }) {
   return (
     <div className={"header__container--base"}>
       <Link to="/" className="header__logo--base"></Link>
-      {session === "" ? (
+      {session === "" || session === undefined || session === null ? (
         <div className={"header__button-group--base"}>
           <Link to="/login" className="header__login--base">
             Log in
@@ -23,6 +23,8 @@ export default function Header({ children }) {
             className="header__button--base"
             onClick={() => {
               setSession("");
+              sessionStorage.setItem("key", "");
+              sessionStorage.removeItem("display");
             }}
           >
             Log Out
@@ -34,13 +36,13 @@ export default function Header({ children }) {
             Profile
           </Link>
           <Link to="/newPost" className="header__button--base">
-            NewPost
+            New Post
           </Link>
         </div>
       )}
       <Link to="/settings" className="header__register--base">
-            Settings
-          </Link>
+        Settings
+      </Link>
       {children}
     </div>
   );

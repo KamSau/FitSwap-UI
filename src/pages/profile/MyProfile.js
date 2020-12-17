@@ -11,7 +11,7 @@ export default function MyProfile({}) {
   const [asked2, setAsked2] = useState(0);
   const [items, setItems] = useState([]);
   const { session, setSession } = useContext(SessionContext);
-  const { settings } = useContext(SettingsContext);
+  const { settings, setSettings } = useContext(SettingsContext);
   const it = [];
 
   let { username } = useParams();
@@ -28,7 +28,10 @@ export default function MyProfile({}) {
         setPerfil(response.data);
 
         await axios
-          .get("https://fitswapbackend.herokuapp.com/api/v1/post/" + response.data.id)
+          .get(
+            "https://fitswapbackend.herokuapp.com/api/v1/post/" +
+              response.data.id
+          )
           .then((responseP) => {
             console.log(responseP.data);
             setAsked(1);

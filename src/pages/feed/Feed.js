@@ -3,14 +3,21 @@ import { SessionContext } from "../../helpers/SessionContext";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import { SettingsContext } from "../../helpers/SettingsContext";
+import SearchBar from "../../components/searchbar/SearchBar";
 export default function Feed() {
   const [perfil, setPerfil] = useState([]);
   const [posts, setPosts] = useState([]);
   const [asked, setAsked] = useState(0);
   const [asked2, setAsked2] = useState(0);
   const [items, setItems] = useState([]);
+
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
   const { session, setSession } = useContext(SessionContext);
-  const { settings, setSettings } = useContext(SettingsContext)
+  const { settings, setSettings } = useContext(SettingsContext);
   const it = [];
 
   const fetchData = async () => {
@@ -18,18 +25,17 @@ export default function Feed() {
     const res = await axios
       .get("https://fitswapbackend.herokuapp.com/api/v1/post/")
       .then(async (responseP) => {
-		console.log(responseP.data);
-		/*arr.map((i)=>{
-			i.url = ("https://res.cloudinary.com/esalomc/image/upload/w_400,h_400/w_400/"+i.url.split("/")[i.url.split("/").length-1]);
-			return i;
-		})*/
+        console.log(responseP.data);
         setAsked(1);
         setPosts(responseP.data);
 
         for (const [index, value] of responseP.data.entries()) {
           let username = "";
           const res = await axios
-            .get("https://fitswapbackend.herokuapp.com/api/v1/user/id/" + value.userId)
+            .get(
+              "https://fitswapbackend.herokuapp.com/api/v1/user/id/" +
+                value.userId
+            )
             .then((res) => {
               console.log(res.data);
               username = res.data.username;
@@ -52,7 +58,9 @@ export default function Feed() {
                       <div className="id">
                         <Link
                           to={"/profile/" + res.data.username}
-                          className={"feed__poster-username--"+ settings.display}
+                          className={
+                            "feed__poster-username--" + settings.display
+                          }
                         >
                           {res.data.username}
                         </Link>
@@ -69,7 +77,9 @@ export default function Feed() {
                         <i className="fas fa-clone" aria-hidden="true" />
                       </div>
                       <div className="feed__image-overlay--base">
-                        {value.title}
+                        <div className="feed__overlay-text--base">
+                          {value.title}
+                        </div>
                       </div>
                     </Link>
                   </div>
@@ -86,34 +96,35 @@ export default function Feed() {
       });
   };
 
+  let filterResults = (e) => {
+    setQuery(e.target.value);
+    setLoading(true);
+    setMessage("");
+    console.log(items);
+    let filteredPosts = posts.filter((p) => {
+      p.description.includes(query);
+    });
+  };
+
   const project = () => {
     if (!asked2) {
       fetchData();
       setAsked2(1);
     }
-    if (true) {
-      return (
-        <div className="perfilFont">
-          <header></header>
-          <main>
-            <div className="container">
-              <div className="gallery">{items}</div>
-              {/* End of gallery */}
-              <div className="loader" />
-            </div>
-            {/* End of container */}
-          </main>
-        </div>
-      );
-    } else {
-      return (
-        <div className="perfilFont">
-          <header>
-            <h1 className="App">Usuario no existe</h1>
-          </header>
-        </div>
-      );
-    }
+    return (
+      <div className="perfilFont">
+        <header></header>
+        <main>
+          {/* <SearchBar onInputChange={filterResults} /> */}
+          <div className="container">
+            <div className="gallery">{items}</div>
+            {/* End of gallery */}
+            <div className="loader" />
+          </div>
+          {/* End of container */}
+        </main>
+      </div>
+    );
   };
 
   return project();
