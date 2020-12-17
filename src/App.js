@@ -43,6 +43,7 @@ function App() {
             </div>
             {session !== "" ? <Footer></Footer> : <div />}
           </div>
+		  <Footer></Footer>
         </CloudinaryContext>
       </SessionContext.Provider>
       </SettingsContext.Provider>
