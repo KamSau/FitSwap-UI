@@ -65,7 +65,7 @@ export default function UserRegistry({ history }) {
       valid = validate(user);
       if (valid) {
         let data = user;
-        Axios.post("https://fitswapbackend.herokuapp.com/api/v1/user", data).then(() => {
+        Axios.post("http://localhost:5000/api/v1/user", data).then(() => {
           setSubmitted(0);
           history.push("/");
         });

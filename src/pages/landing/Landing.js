@@ -9,7 +9,7 @@ export default function Landing() {
   const { session, setSession } = useContext(SessionContext);
   useEffect(() => {
     if (state !== "connected") {
-      axios.get(`https://fitswapbackend.herokuapp.com/api/v1/test`).then((res) => {
+      axios.get(`http://localhost:5000/api/v1/test`).then((res) => {
         if (res.data === "connected") {
           setState(res.data);
         }
@@ -17,7 +17,7 @@ export default function Landing() {
     } else {
       if (session !== "") {
         axios
-          .get(`https://fitswapbackend.herokuapp.com/api/v1/session`, {
+          .get(`http://localhost:5000/api/v1/session`, {
             headers: { Authorization: "Bearer " + session },
           })
           .then((res) => {

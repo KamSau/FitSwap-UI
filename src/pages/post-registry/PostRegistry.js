@@ -36,7 +36,7 @@ export default function PostRegistry({ history }) {
   useEffect(() => {
     if (fetched !== "connected") {
       axios
-        .get(`https://fitswapbackend.herokuapp.com/api/v1/user`, {
+        .get(`http://localhost:5000/api/v1/user`, {
           headers: { Authorization: "Bearer " + session },
         })
         .then((res) => {
@@ -65,7 +65,7 @@ export default function PostRegistry({ history }) {
       valid = validate(post);
       if (valid) {
         axios
-          .post("https://fitswapbackend.herokuapp.com/api/v1/post", post, {
+          .post("http://localhost:5000/api/v1/post", post, {
             headers: { Authorization: { Bearer: session } },
           })
           .then((res) => {

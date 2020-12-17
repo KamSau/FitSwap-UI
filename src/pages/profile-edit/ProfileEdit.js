@@ -20,7 +20,6 @@ export default function UserUpdate({ history }) {
     identification: "",
     description: "",
     img_url: "",});
-  const [id, setId] = useState("");
   const [img_url, setUrl] = useState("");
   const [fetched, setFetched] = useState("");
   const [name, setName] = useState("");
@@ -43,12 +42,11 @@ export default function UserUpdate({ history }) {
   useEffect(() => {
     if (fetched !== "connected") {
       axios
-        .get(`https://fitswapbackend.herokuapp.com/api/v1/user`, {
+        .get(`http://localhost:5000/api/v1/user`, {
           headers: { Authorization: "Bearer " + session },
         })
         .then((res) => {
           setState(res.data);
-		  setId(res.data.id);
           setFetched("connected");
           console.log(fetched);
         });
@@ -62,7 +60,6 @@ export default function UserUpdate({ history }) {
   }, [submitted]);
 
   let sendUpdate = () => {
-    let pid = id;
     let pusername = username;
     let pname = name;
     let plast_name = lastName;
@@ -75,7 +72,6 @@ export default function UserUpdate({ history }) {
     let purl = img_url;
 
     let user = {
-      id: pid,
       username: pusername,
       name: pname,
       lastName: plast_name,
@@ -93,7 +89,7 @@ export default function UserUpdate({ history }) {
       valid = validate(user);
       if (valid) {
         let data = user;
-        axios.put(`http://localhost:5000/api/v1/user`, data).then(() => {
+        axios.put(`http://localhost:5000/api/v1/user`, data, {headers: { Authorization: "Bearer " + session },}).then(() => {
           setSubmitted(0);
           history.push("/profile");
         });
@@ -104,15 +100,6 @@ export default function UserUpdate({ history }) {
   let validate = (user) => {
     let valid = false;
     if (
-      user.id === "" ||
-      user.username === "" ||
-      user.email === "" ||
-      user.name === "" ||
-      user.last_name === "" ||
-      user.cellphone === ""||
-      user.password === ""||
-      user.description === ""||
-      user.img_url === "" ||
       submitted == 0
     ) {
       valid = false;
@@ -134,17 +121,6 @@ export default function UserUpdate({ history }) {
         }}
       >
         <CloudinaryWidget setUrl={setUrl}></CloudinaryWidget>
-        <Input
-          id="id"
-          name="id"
-          type="text"
-          label="Id"
-          value={state.id}
-          modifier={settings.display}
-          onChangeF={(e) => {
-            setId(e.target.value);
-          }}
-        />
         <Input
           id="username"
           name="username"
