@@ -18,7 +18,11 @@ export default function Feed() {
     const res = await axios
       .get("https://fitswapbackend.herokuapp.com/api/v1/post/")
       .then(async (responseP) => {
-        console.log(responseP.data);
+		console.log(responseP.data);
+		/*arr.map((i)=>{
+			i.url = ("https://res.cloudinary.com/esalomc/image/upload/w_400,h_400/w_400/"+i.url.split("/")[i.url.split("/").length-1]);
+			return i;
+		})*/
         setAsked(1);
         setPosts(responseP.data);
 
