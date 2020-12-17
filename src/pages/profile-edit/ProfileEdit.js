@@ -93,7 +93,9 @@ export default function UserUpdate({ history }) {
           setSubmitted(0);
           history.push("/profile");
         });
-      }
+      }else{
+		setSubmitted(0);
+	  }
     
   };
 
