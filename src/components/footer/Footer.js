@@ -7,11 +7,11 @@ export default function Footer() {
 	const [fetched, setFetched] = useState("");
 	const [version, setVersion] = useState("");
 
-	
+
 	useEffect(() => {
 		if (fetched !== "connected") {
 		  axios
-			.get(`https://fitswapbackend.herokuapp.com/api/v1/test`)
+			.get(`https://fitswapbackend.herokuapp.com/api/v1/version`)
 			.then((res) => {
 			  setVersion(res.data);
 			  setFetched("connected");

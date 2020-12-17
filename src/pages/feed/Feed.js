@@ -69,7 +69,7 @@ export default function Feed() {
                         <i className="fas fa-clone" aria-hidden="true" />
                       </div>
                       <div className="feed__image-overlay--base">
-                        {value.description}
+                        {value.title}
                       </div>
                     </Link>
                   </div>
