@@ -1,5 +1,31 @@
 .search {
   &__container {
+    display: flex;
+    width: 100%;
+    padding: 0% 20% 3% 20%;
+
+    &--base {
+    }
+    &--dark {
+    }
+  }
+  &__input {
+    width: 100%;
+    border: 1px solid rgb(138, 134, 134);
+    border-radius: 19px;
+    cursor: pointer;
+    box-shadow: 0 0 1px black;
+    padding-left: 10px;
+    padding-right: 8px;
+    padding-top: 4px;
+    &--base {
+    }
+    &--dark {
+    }
+  }
+
+  &__label {
+    width: 100%;
     &--base {
     }
     &--dark {

@@ -9,7 +9,7 @@ export default function Post({}) {
   const [asked2, setAsked2] = useState(0);
   const [items, setItems] = useState([]);
   const it = [];
-  const {settings} = useContext(SettingsContext);
+  const { settings } = useContext(SettingsContext);
   let { username, post } = useParams();
 
   const fetchData = async () => {
@@ -21,7 +21,10 @@ export default function Post({}) {
         setAsked(1);
         setPerfil(response.data);
         await axios
-          .get("https://fitswapbackend.herokuapp.com/api/v1/post/" + response.data.id)
+          .get(
+            "https://fitswapbackend.herokuapp.com/api/v1/post/" +
+              response.data.id
+          )
           .then((responseP) => {
             console.log(responseP.data);
             setAsked2(1);
@@ -51,7 +54,11 @@ export default function Post({}) {
     }
     if (actualPost && actualPost.url) {
       return (
-        <div className={"feed post__container--"+ settings.display}>
+        <div
+          className={
+            "feed post__container post__container--" + settings.display
+          }
+        >
           <section className="username post_poster-info--base">
             <div className="image post__poster-image--base">
               <Link to={"/profile/" + username}>
@@ -65,14 +72,18 @@ export default function Post({}) {
           <section className="post">
             <img src={actualPost.url} />
           </section>
-          <section className={"caption post__caption-container--" + settings.display}>
+          <section
+            className={"caption post__caption-container--" + settings.display}
+          >
             <p>
               <Link
                 to={"/profile/" + username}
                 style={{ textDecoration: "none" }}
                 className={"post__caption-username--" + settings.display}
               >
-                <b className={"post__caption-username--" + settings.display}>{perfil.username}</b>
+                <b className={"post__caption-username--" + settings.display}>
+                  {perfil.username}
+                </b>
               </Link>
             </p>
             <p>

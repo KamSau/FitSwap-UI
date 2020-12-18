@@ -344,7 +344,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-    grid-gap: 2rem;
+    grid-gap: 1.5rem;
   }
 
   .profile-image,

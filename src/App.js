@@ -15,7 +15,7 @@ import { SessionContext } from "./helpers/SessionContext";
 import { SettingsContext } from "./helpers/SettingsContext";
 import Footer from "./components/footer/Footer";
 import ProfileEdit from "./pages/profile-edit/ProfileEdit";
-import Feed from "./pages/feed/Feed";
+import Feed from "./pages/feed/Feedv2";
 import MyProfile from "./pages/profile/MyProfile";
 import Settings from "./pages/settings/Settings";
 function App() {
