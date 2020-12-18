@@ -63,7 +63,7 @@ export default function Feed() {
       setMessage("");
       console.log(items);
       let filteredPosts = posts.filter((p) => {
-        if (p.description.includes(query)) {
+        if (p.title.includes(query)) {
           return p;
         }
       });
